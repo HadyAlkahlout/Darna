@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/driver_nav"
+    app:startDestination="@id/driverHomeFragment">
+
+    <fragment
+        android:id="@+id/driverHomeFragment"
+        android:name="com.raiyansoft.darnaapp.ui.fragments.driver.DriverHomeFragment"
+        android:label="DriverHomeFragment" >
+        <action
+            android:id="@+id/action_driverHomeFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.raiyansoft.darnaapp.ui.fragments.settings.SettingsFragment"
+        android:label="SettingsFragment" >
+        <action
+            android:id="@+id/action_settingsFragment_to_faqFragment"
+            app:destination="@id/faqFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left" />
+        <action
+            android:id="@+id/action_settingsFragment_to_policyFragment"
+            app:destination="@id/policyFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left" />
+        <action
+            android:id="@+id/action_settingsFragment_to_termsFragment"
+            app:destination="@id/termsFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"  />
+        <action
+            android:id="@+id/action_settingsFragment_to_aboutFragment"
+            app:destination="@id/aboutFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"  />
+        <action
+            android:id="@+id/action_settingsFragment_to_callFragment"
+            app:destination="@id/callFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"  />
+    </fragment>
+    <fragment
+        android:id="@+id/faqFragment"
+        android:name="com.raiyansoft.darnaapp.ui.fragments.settings.FaqFragment"
+        android:label="FaqFragment" />
+    <fragment
+        android:id="@+id/policyFragment"
+        android:name="com.raiyansoft.darnaapp.ui.fragments.settings.PolicyFragment"
+        android:label="PolicyFragment" />
+    <fragment
+        android:id="@+id/termsFragment"
+        android:name="com.raiyansoft.darnaapp.ui.fragments.settings.TermsFragment"
+        android:label="TermsFragment" />
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.raiyansoft.darnaapp.ui.fragments.settings.AboutFragment"
+        android:label="AboutFragment" />
+    <fragment
+        android:id="@+id/callFragment"
+        android:name="com.raiyansoft.darnaapp.ui.fragments.settings.CallFragment"
+        android:label="CallFragment" />
+</navigation>
