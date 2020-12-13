@@ -76,6 +76,11 @@ class FilterDialog(val listener: FilterDialogListener) : DialogFragment(), Optio
     }
 
     override fun cancelClick(position: Int) {
-
+        options.removeAt(position)
+        adapter.data.removeAt(position)
+        adapter.notifyDataSetChanged()
+        if (options.isEmpty()){
+            binding.isFill = false
+        }
     }
 }
