@@ -9,7 +9,6 @@ import com.raiyansoft.darnaapp.model.general.FullPagingGeneral
 import com.raiyansoft.darnaapp.model.general.General
 import com.raiyansoft.darnaapp.model.product.Product
 import com.raiyansoft.darnaapp.model.productDetails.ProductDetails
-import com.raiyansoft.darnaapp.model.profile.Profile
 import com.raiyansoft.darnaapp.repositories.ApiRepository
 import com.raiyansoft.darnaapp.uitl.Commons
 import kotlinx.coroutines.launch

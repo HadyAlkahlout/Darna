@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
-import com.raiyansoft.darnaapp.R
 import com.raiyansoft.darnaapp.databinding.DialogCustomBinding
 import com.raiyansoft.darnaapp.listeners.CustomDialogListener
 

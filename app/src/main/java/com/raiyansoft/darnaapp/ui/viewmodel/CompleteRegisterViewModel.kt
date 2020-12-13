@@ -4,8 +4,6 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.raiyansoft.darnaapp.model.city.City
-import com.raiyansoft.darnaapp.model.general.FullGeneral
 import com.raiyansoft.darnaapp.model.general.General
 import com.raiyansoft.darnaapp.repositories.ApiRepository
 import com.raiyansoft.darnaapp.uitl.Commons

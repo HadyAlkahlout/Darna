@@ -5,9 +5,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.raiyansoft.darnaapp.R
-import com.raiyansoft.darnaapp.databinding.ItemBranchBinding
 import com.raiyansoft.darnaapp.databinding.ItemProductBinding
-import com.raiyansoft.darnaapp.model.branch.Branch
 import com.raiyansoft.darnaapp.model.product.Product
 
 class ProductsAdapter(var data: ArrayList<Product>, var listener: ProductClick) : RecyclerView.Adapter<ProductsAdapter.MyViewHolder>() {

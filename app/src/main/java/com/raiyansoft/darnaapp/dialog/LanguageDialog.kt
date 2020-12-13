@@ -8,7 +8,7 @@ import androidx.fragment.app.DialogFragment
 import com.raiyansoft.darnaapp.databinding.DialogeLanguageBinding
 import com.raiyansoft.darnaapp.uitl.Commons
 
-class LanguageDialog() : DialogFragment() {
+class LanguageDialog : DialogFragment() {
 
     private lateinit var binding: DialogeLanguageBinding
 

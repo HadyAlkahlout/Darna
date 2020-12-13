@@ -1,23 +1,19 @@
 package com.raiyansoft.darnaapp.ui.fragments.storeManger
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.raiyansoft.darnaapp.R
 import com.raiyansoft.darnaapp.databinding.FragmentRegisterBinding
-import com.raiyansoft.darnaapp.dialog.CustomFragmentDialog
 import com.raiyansoft.darnaapp.dialog.LoadingDialog
 import com.raiyansoft.darnaapp.dialog.MapDialog
-import com.raiyansoft.darnaapp.listeners.CustomDialogListener
 import com.raiyansoft.darnaapp.listeners.MapDialogListener
 import com.raiyansoft.darnaapp.model.categories.Category
 import com.raiyansoft.darnaapp.model.city.City

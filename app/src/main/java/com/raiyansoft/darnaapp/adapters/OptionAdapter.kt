@@ -5,23 +5,24 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.raiyansoft.darnaapp.R
-import com.raiyansoft.darnaapp.databinding.ItemFilterBinding
+import com.raiyansoft.darnaapp.databinding.ItemOptionBinding
+import com.raiyansoft.darnaapp.model.productDetails.Option
 
-class FiltersAdapter(var listener: FilterCancel) : RecyclerView.Adapter<FiltersAdapter.MyViewHolder>() {
+class OptionAdapter(var listener: OptionCancel) : RecyclerView.Adapter<OptionAdapter.MyViewHolder>() {
 
-    var data: ArrayList<String> = ArrayList()
+    var data: ArrayList<Option> = ArrayList()
     private lateinit var layoutInflater: LayoutInflater
-    private lateinit var binding: ItemFilterBinding
+    private lateinit var binding: ItemOptionBinding
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         layoutInflater = LayoutInflater.from(parent.context)
-        binding = DataBindingUtil.inflate(layoutInflater, R.layout.item_filter, parent, false)
+        binding = DataBindingUtil.inflate(layoutInflater, R.layout.item_option, parent, false)
         return MyViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.bingFilter(data[position])
-        binding.imageViewCancel.setOnClickListener {
+        holder.bingOption(data[position])
+        binding.imageViewDelete.setOnClickListener {
             listener.cancelClick(position)
         }
     }
@@ -30,14 +31,14 @@ class FiltersAdapter(var listener: FilterCancel) : RecyclerView.Adapter<FiltersA
         return data.size
     }
 
-    inner class MyViewHolder(var item: ItemFilterBinding) : RecyclerView.ViewHolder(item.root) {
-        fun bingFilter(title: String) {
-            item.filter = title
+    inner class MyViewHolder(var item: ItemOptionBinding) : RecyclerView.ViewHolder(item.root) {
+        fun bingOption(option: Option) {
+            item.option = option
             item.executePendingBindings()
         }
     }
 
-    interface FilterCancel {
+    interface OptionCancel {
         fun cancelClick(position: Int)
     }
 }
