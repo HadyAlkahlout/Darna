@@ -7,6 +7,7 @@ import com.raiyansoft.darnaapp.model.general.FullGeneral
 import com.raiyansoft.darnaapp.model.general.FullPagingGeneral
 import com.raiyansoft.darnaapp.model.general.General
 import com.raiyansoft.darnaapp.model.product.Product
+import com.raiyansoft.darnaapp.model.productDetails.ProductDetails
 import com.raiyansoft.darnaapp.model.profile.Profile
 import com.raiyansoft.darnaapp.model.register.Activation
 import com.raiyansoft.darnaapp.model.register.Register
@@ -158,5 +159,55 @@ interface Api {
         @Header("Authorization") Authorization: String,
         @Query("page") page: Int
     ) : Response<FullPagingGeneral<Product>>
+
+    @GET("user/products/details/{id}")
+    suspend fun getProductDetails(
+        @Header("lang") lang: String,
+        @Header("Authorization") Authorization: String,
+        @Path("id") id: Int
+    ) : Response<FullGeneral<ProductDetails>>
+
+    @GET("user/getSubCats")
+    suspend fun getInternalCategories(
+        @Header("lang") lang: String,
+        @Header("Authorization") Authorization: String
+    ) : Response<FullGeneral<List<Category>>>
+
+    @GET("products/updateQuantity/{id}")
+    suspend fun updateQuantity(
+        @Header("lang") lang: String,
+        @Header("Authorization") Authorization: String,
+        @Path("id") id: Int
+    ) : Response<General>
+
+    @POST("products/createProduct")
+    suspend fun createProduct(
+        @Header("lang") lang: String,
+        @Header("Authorization") Authorization: String,
+        @PartMap params: Map<String, @JvmSuppressWildcards RequestBody>,
+        @Part images: List<MultipartBody.Part>
+    ) : Response<General>
+
+    @POST("products/updateProduct")
+    suspend fun updateProduct(
+        @Header("lang") lang: String,
+        @Header("Authorization") Authorization: String,
+        @PartMap params: Map<String, @JvmSuppressWildcards RequestBody>,
+        @Part images: List<MultipartBody.Part>
+    ) : Response<General>
+
+    @GET("products/deleteProduct/{id}")
+    suspend fun deleteProduct(
+        @Header("lang") lang: String,
+        @Header("Authorization") Authorization: String,
+        @Path("id") id: Int
+    ) : Response<General>
+
+    @GET("products/deleteImage/{id}")
+    suspend fun deleteImage(
+        @Header("lang") lang: String,
+        @Header("Authorization") Authorization: String,
+        @Path("id") id: Int
+    ) : Response<General>
 
 }

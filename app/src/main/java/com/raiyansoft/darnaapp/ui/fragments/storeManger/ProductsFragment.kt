@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AbsListView
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,6 +17,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.raiyansoft.darnaapp.R
 import com.raiyansoft.darnaapp.adapters.ProductsAdapter
 import com.raiyansoft.darnaapp.databinding.FragmentProductsBinding
+import com.raiyansoft.darnaapp.dialog.LoadingDialog
 import com.raiyansoft.darnaapp.model.product.Product
 import com.raiyansoft.darnaapp.ui.viewmodel.ProductViewModel
 import com.raiyansoft.darnaapp.uitl.OnScrollListener
@@ -26,10 +28,11 @@ class ProductsFragment : Fragment(), ProductsAdapter.ProductClick {
     private val viewModel by lazy {
         ViewModelProvider(this)[ProductViewModel::class.java]
     }
-    private val products = ArrayList<Product>()
-    private val adapter by lazy {
-        ProductsAdapter(products, this)
+    private val loadingDialoge by lazy {
+        LoadingDialog()
     }
+    private lateinit var products: ArrayList<Product>
+    private lateinit var adapter: ProductsAdapter
     private var currentPage = 1
     private var totalAvailablePages = 1
     private var loading = false
@@ -42,15 +45,24 @@ class ProductsFragment : Fragment(), ProductsAdapter.ProductClick {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onResume() {
+        super.onResume()
         doInitialization()
     }
 
     private fun doInitialization() {
+        loadingDialoge.isCancelable = false
         binding.imageViewBack.setOnClickListener {
             findNavController().navigateUp()
         }
+        doWork()
+    }
+
+    private fun doWork() {
+        currentPage = 1
+        totalAvailablePages = 1
+        products = ArrayList()
+        adapter = ProductsAdapter(products, this)
         binding.recyclerProducts.setHasFixedSize(false)
         binding.recyclerProducts.adapter = adapter
         binding.recyclerProducts.layoutManager = LinearLayoutManager(requireContext())
@@ -59,8 +71,8 @@ class ProductsFragment : Fragment(), ProductsAdapter.ProductClick {
     }
 
     private val onScrollListener = OnScrollListener {
-        if (binding.recyclerProducts.canScrollVertically(1)){
-            if (currentPage <= totalAvailablePages){
+        if (binding.recyclerProducts.canScrollVertically(1)) {
+            if (currentPage <= totalAvailablePages) {
                 currentPage += 1
                 getProducts()
             }
@@ -92,23 +104,43 @@ class ProductsFragment : Fragment(), ProductsAdapter.ProductClick {
     }
 
     private fun toggleLoading() {
-        if (currentPage == 1){
-            if (binding.isLoading != null){
+        if (currentPage == 1) {
+            if (binding.isLoading != null) {
                 binding.isLoading = loading
-            }else{
+            } else {
                 binding.isLoading = true
             }
         } else {
-            if (binding.isLoadingMore != null){
+            if (binding.isLoadingMore != null) {
                 binding.isLoadingMore = loading
-            }else{
+            } else {
                 binding.isLoadingMore = true
             }
         }
     }
 
     override fun productClick(id: Int) {
-        Toast.makeText(requireContext(), id.toString(), Toast.LENGTH_SHORT).show()
+        val bundle = bundleOf("id" to id, "edit" to true)
+        findNavController().navigate(
+            R.id.action_productsFragment_to_addProductsFragment,
+            bundle
+        )
+    }
+
+    override fun deleteClick(id: Int) {
+        loadingDialoge.show(requireActivity().supportFragmentManager, "Loading")
+        viewModel.deleteProduct(id)
+        viewModel.dataDelete.observe(viewLifecycleOwner,
+            { response ->
+                if (response.status && response.code == 200) {
+                    loadingDialoge.dismiss()
+                    Snackbar.make(requireView(), getString(R.string.done_successfully), 3000).show()
+                    doWork()
+                } else {
+                    loadingDialoge.dismiss()
+                    Snackbar.make(requireView(), response.message, 3000).show()
+                }
+            })
     }
 
 }

@@ -151,7 +151,7 @@ class RegisterFragment : Fragment(), MapDialogListener {
     private fun fillSections() {
         val names = ArrayList<String>()
         names.add(getString(R.string.category))
-        category.add(Category(0, getString(R.string.category), 0))
+        category.add(Category(0, getString(R.string.category), 0, ""))
         categoryViewModel.dataCategory.observe(viewLifecycleOwner,
             { response ->
                 if (response.status && response.code == 200) {

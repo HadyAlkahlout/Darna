@@ -8,5 +8,7 @@ data class Category(
     @SerializedName("title")
     val title: String,
     @SerializedName("subCategory")
-    val subCategory: Int
+    val subCategory: Int,
+    @SerializedName("cat")
+    val cat: String
 )

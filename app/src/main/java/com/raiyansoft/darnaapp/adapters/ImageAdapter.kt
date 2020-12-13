@@ -23,7 +23,7 @@ class ImageAdapter(val listener: ImageClick) : RecyclerView.Adapter<ImageAdapter
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.bingImage(data[position])
         binding.imageDelete.setOnClickListener {
-            listener.deleteClick(data[position].id)
+            listener.deleteImage(position, data[position].id)
         }
     }
 
@@ -39,6 +39,6 @@ class ImageAdapter(val listener: ImageClick) : RecyclerView.Adapter<ImageAdapter
     }
 
     interface ImageClick {
-        fun deleteClick(id: Int)
+        fun deleteImage(position: Int, id: Int)
     }
 }

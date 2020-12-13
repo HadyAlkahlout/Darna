@@ -17,6 +17,7 @@ class CategoryViewModel(application: Application) : AndroidViewModel(application
 
     val repository = ApiRepository()
     val dataCategory = MutableLiveData<FullGeneral<List<Category>>>()
+    val dataInternalCategories = MutableLiveData<FullGeneral<List<Category>>>()
 
     private val lang = Commons.getSharedPreferences(application.applicationContext).getString(Commons.LANGUAGE, "")!!
     private val token = Commons.getSharedPreferences(application.applicationContext).getString(Commons.UserToken, "")!!
@@ -28,9 +29,17 @@ class CategoryViewModel(application: Application) : AndroidViewModel(application
         }
     }
 
+    private suspend fun getInternalCategories() {
+        val response = repository.getInternalCategories(lang, token)
+        if (response.isSuccessful){
+            dataInternalCategories.postValue(response.body())
+        }
+    }
+
     private fun getData(){
         viewModelScope.launch {
             getCategories()
+            getInternalCategories()
         }
     }
 

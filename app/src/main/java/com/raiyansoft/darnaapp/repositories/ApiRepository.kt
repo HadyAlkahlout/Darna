@@ -5,6 +5,7 @@ import com.raiyansoft.darnaapp.model.setting.CallData
 import com.raiyansoft.darnaapp.network.ServiceBuilder
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import retrofit2.http.Part
 
 class ApiRepository {
 
@@ -93,5 +94,55 @@ class ApiRepository {
         page: Int
     ) =
         ServiceBuilder.apis!!.getProducts(lang, Authorization, page)
+
+    suspend fun getProductDetails(
+        lang: String,
+        Authorization: String,
+        id: Int
+    ) =
+        ServiceBuilder.apis!!.getProductDetails(lang, Authorization, id)
+
+    suspend fun getInternalCategories(
+        lang: String,
+        Authorization: String
+    ) =
+        ServiceBuilder.apis!!.getInternalCategories(lang, Authorization)
+
+    suspend fun updateQuantity(
+        lang: String,
+        Authorization: String,
+        id: Int
+    ) =
+        ServiceBuilder.apis!!.updateQuantity(lang, Authorization, id)
+
+    suspend fun createProduct(
+        lang: String,
+        Authorization: String,
+        map : Map<String, RequestBody>,
+        images: List<MultipartBody.Part>
+    ) =
+        ServiceBuilder.apis!!.createProduct(lang, Authorization, map, images)
+
+    suspend fun updateProduct(
+        lang: String,
+        Authorization: String,
+        map : Map<String, RequestBody>,
+        images: List<MultipartBody.Part>
+    ) =
+        ServiceBuilder.apis!!.updateProduct(lang, Authorization, map, images)
+
+    suspend fun deleteProduct(
+        lang: String,
+        Authorization: String,
+        id: Int
+    ) =
+        ServiceBuilder.apis!!.deleteProduct(lang, Authorization, id)
+
+    suspend fun deleteImage(
+        lang: String,
+        Authorization: String,
+        id: Int
+    ) =
+        ServiceBuilder.apis!!.deleteImage(lang, Authorization, id)
 
 }

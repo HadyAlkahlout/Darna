@@ -57,6 +57,13 @@
             app:popExitAnim="@anim/slide_out_right"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left" />
+        <action
+            android:id="@+id/action_mangerHomeFragment_to_addProductsFragment"
+            app:destination="@id/addProductsFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left" />
     </fragment>
     <fragment
         android:id="@+id/editStoreFragment"
@@ -150,5 +157,22 @@
     <fragment
         android:id="@+id/productsFragment"
         android:name="com.raiyansoft.darnaapp.ui.fragments.storeManger.ProductsFragment"
-        android:label="ProductsFragment" />
+        android:label="ProductsFragment" >
+        <action
+            android:id="@+id/action_productsFragment_to_addProductsFragment"
+            app:destination="@id/addProductsFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"/>
+    </fragment>
+    <fragment
+        android:id="@+id/addProductsFragment"
+        android:name="com.raiyansoft.darnaapp.ui.fragments.storeManger.AddProductsFragment"
+        android:label="AddProductsFragment">
+        <argument android:name="edit"
+            app:argType="Boolean"/>
+        <argument android:name="id"
+            app:argType="Int"/>
+    </fragment>
 </navigation>

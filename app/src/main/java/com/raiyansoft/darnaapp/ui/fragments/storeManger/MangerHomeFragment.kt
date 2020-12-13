@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
@@ -82,7 +83,11 @@ class MangerHomeFragment : Fragment(), View.OnClickListener, CustomDialogListene
                 statusDialog.show(requireActivity().supportFragmentManager, "status dialog")
             }
             R.id.buttonAddProduct -> {
-                Snackbar.make(requireView(), getString(R.string.add_product), 5000).show()
+                val bundle = bundleOf("edit" to false)
+                findNavController().navigate(
+                    R.id.action_mangerHomeFragment_to_addProductsFragment,
+                    bundle
+                )
             }
             R.id.buttonOurProducts -> {
                 findNavController().navigate(R.id.action_mangerHomeFragment_to_productsFragment)

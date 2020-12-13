@@ -26,6 +26,9 @@ class ProductsAdapter(var data: ArrayList<Product>, var listener: ProductClick) 
         binding.cardProduct.setOnClickListener {
             listener.productClick(data[position].id)
         }
+        binding.imageViewDelete.setOnClickListener {
+            listener.deleteClick(data[position].id)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -42,5 +45,6 @@ class ProductsAdapter(var data: ArrayList<Product>, var listener: ProductClick) 
 
     interface ProductClick {
         fun productClick(id: Int)
+        fun deleteClick(id: Int)
     }
 }
