@@ -145,4 +145,24 @@ class ApiRepository {
     ) =
         ServiceBuilder.apis!!.deleteImage(lang, Authorization, id)
 
+    suspend fun getMarketOrders(
+        lang: String,
+        Authorization: String
+    ) =
+        ServiceBuilder.apis!!.getMarketOrders(lang, Authorization)
+
+    suspend fun marketOrderDetails(
+        lang: String,
+        Authorization: String,
+        id: Int
+    ) =
+        ServiceBuilder.apis!!.marketOrderDetails(lang, Authorization, id)
+
+    suspend fun changeOrderStatus(
+        lang: String,
+        Authorization: String,
+        params: Map<String, RequestBody>
+    ) =
+        ServiceBuilder.apis!!.changeOrderStatus(lang, Authorization, params)
+
 }

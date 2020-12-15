@@ -64,6 +64,13 @@
             app:popExitAnim="@anim/slide_out_right"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left" />
+        <action
+            android:id="@+id/action_mangerHomeFragment_to_marketOrdersFragment"
+            app:destination="@id/marketOrdersFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left" />
     </fragment>
     <fragment
         android:id="@+id/editStoreFragment"
@@ -171,8 +178,27 @@
         android:name="com.raiyansoft.darnaapp.ui.fragments.storeManger.AddProductsFragment"
         android:label="AddProductsFragment">
         <argument android:name="edit"
-            app:argType="Boolean"/>
+            android:defaultValue="none"/>
         <argument android:name="id"
-            app:argType="Int"/>
+            android:defaultValue="none"/>
+    </fragment>
+    <fragment
+        android:id="@+id/marketOrdersFragment"
+        android:name="com.raiyansoft.darnaapp.ui.fragments.storeManger.MarketOrdersFragment"
+        android:label="MarketOrdersFragment" >
+        <action
+            android:id="@+id/action_marketOrdersFragment_to_marketOrderFragment"
+            app:destination="@id/marketOrderFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"/>
+    </fragment>
+    <fragment
+        android:id="@+id/marketOrderFragment"
+        android:name="com.raiyansoft.darnaapp.ui.fragments.storeManger.MarketOrderFragment"
+        android:label="MarketOrderFragment">
+        <argument android:name="id"
+            android:defaultValue="none"/>
     </fragment>
 </navigation>

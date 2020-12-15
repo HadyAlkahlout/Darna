@@ -43,6 +43,7 @@
     <string name="our_product">منتجاتنا</string>
     <string name="edit_store">تعديل المتجر</string>
     <string name="orders">الطلبات الواردة</string>
+    <string name="order">طلب</string>
     <string name="reports">التقارير</string>
     <string name="branch">الفرع</string>
     <string name="branches">الفروع</string>
@@ -97,7 +98,7 @@
     <string name="product_description">وصف المنتج</string>
     <string name="quantity_expired">انتهاء الكمية</string>
     <string name="add_filter">اضافة فلتر</string>
-    <string name="add">اضافة</string>
+    <string name="add_option">اضافة خيار</string>
     <string name="publish_product">نشر المنتج</string>
     <string name="multiple_choice">الختيار المتعدد</string>
     <string name="permissible">مسموح</string>
@@ -107,4 +108,14 @@
     <string name="option_arabic_title">عنوان الخيار بالعربية</string>
     <string name="option_english_title">عنوان الخيار بالانجليزية</string>
     <string name="done_successfully">تم بنجاح</string>
+    <string name="today">اليوم</string>
+    <string name="tomorrow">غدا</string>
+    <string name="two_days">بعد يومين</string>
+    <string name="three_days">بعد ثلاث أيام</string>
+    <string name="order_no">رقم الاوردر</string>
+    <string name="status">الحالة</string>
+    <string name="cost">التكلفة</string>
+    <string name="empty_order">لا يوجد طلبات لك</string>
+    <string name="receipt_request">استلام الطلب</string>
+    <string name="rejection_request">رفض الطلب</string>
 </resources>

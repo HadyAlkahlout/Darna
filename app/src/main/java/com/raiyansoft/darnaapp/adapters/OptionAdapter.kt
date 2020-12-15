@@ -23,7 +23,7 @@ class OptionAdapter(var listener: OptionCancel) : RecyclerView.Adapter<OptionAda
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.bingOption(data[position])
         binding.imageViewDelete.setOnClickListener {
-            listener.cancelClick(position)
+            listener.optionCancel(position)
         }
     }
 
@@ -39,6 +39,6 @@ class OptionAdapter(var listener: OptionCancel) : RecyclerView.Adapter<OptionAda
     }
 
     interface OptionCancel {
-        fun cancelClick(position: Int)
+        fun optionCancel(position: Int)
     }
 }

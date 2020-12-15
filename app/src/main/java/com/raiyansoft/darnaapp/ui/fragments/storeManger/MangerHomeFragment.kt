@@ -81,7 +81,7 @@ class MangerHomeFragment : Fragment(), View.OnClickListener, CustomDialogListene
                 statusDialog.show(requireActivity().supportFragmentManager, "status dialog")
             }
             R.id.buttonAddProduct -> {
-                val bundle = bundleOf("edit" to false)
+                val bundle = bundleOf("edit" to "no")
                 findNavController().navigate(
                     R.id.action_mangerHomeFragment_to_addProductsFragment,
                     bundle
@@ -94,7 +94,7 @@ class MangerHomeFragment : Fragment(), View.OnClickListener, CustomDialogListene
                 findNavController().navigate(R.id.action_mangerHomeFragment_to_editStoreFragment)
             }
             R.id.buttonIncomingOrders -> {
-                Snackbar.make(requireView(), getString(R.string.orders), 5000).show()
+                findNavController().navigate(R.id.action_mangerHomeFragment_to_marketOrdersFragment)
             }
             R.id.buttonReports -> {
                 Snackbar.make(requireView(), getString(R.string.reports), 5000).show()

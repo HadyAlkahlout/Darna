@@ -8,7 +8,7 @@ import com.raiyansoft.darnaapp.R
 import com.raiyansoft.darnaapp.databinding.ItemProductBinding
 import com.raiyansoft.darnaapp.model.product.Product
 
-class ProductsAdapter(var data: ArrayList<Product>, var listener: ProductClick) : RecyclerView.Adapter<ProductsAdapter.MyViewHolder>() {
+class ProductsAdapter(var isShow: Boolean, var data: ArrayList<Product>, var listener: ProductClick) : RecyclerView.Adapter<ProductsAdapter.MyViewHolder>() {
 
     private lateinit var layoutInflater: LayoutInflater
     private lateinit var binding: ItemProductBinding
@@ -21,6 +21,8 @@ class ProductsAdapter(var data: ArrayList<Product>, var listener: ProductClick) 
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.bingProduct(data[position])
+        binding.isSold = data[position].quantity == 0
+        binding.isShow = isShow
         binding.cardProduct.setOnClickListener {
             listener.productClick(data[position].id)
         }

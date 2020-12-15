@@ -26,13 +26,13 @@ import com.karumi.dexter.listener.single.PermissionListener
 import com.raiyansoft.darnaapp.R
 import com.raiyansoft.darnaapp.adapters.FiltersAdapter
 import com.raiyansoft.darnaapp.adapters.ImageAdapter
+import com.raiyansoft.darnaapp.adapters.OptionAdapter
 import com.raiyansoft.darnaapp.databinding.FragmentAddProductsBinding
-import com.raiyansoft.darnaapp.dialog.FilterDialog
 import com.raiyansoft.darnaapp.dialog.LoadingDialog
-import com.raiyansoft.darnaapp.listeners.FilterDialogListener
 import com.raiyansoft.darnaapp.model.categories.Category
 import com.raiyansoft.darnaapp.model.productDetails.Filter
 import com.raiyansoft.darnaapp.model.productDetails.Image
+import com.raiyansoft.darnaapp.model.productDetails.Option
 import com.raiyansoft.darnaapp.ui.viewmodel.CategoryViewModel
 import com.raiyansoft.darnaapp.ui.viewmodel.ProductViewModel
 import com.raiyansoft.darnaapp.uitl.Commons
@@ -41,20 +41,21 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import java.io.File
 
-class AddProductsFragment : Fragment(), ImageAdapter.ImageClick, FilterDialogListener, FiltersAdapter.FilterCancel{
+class AddProductsFragment : Fragment(), ImageAdapter.ImageClick, FiltersAdapter.FilterCancel, OptionAdapter.OptionCancel{
 
     private lateinit var binding: FragmentAddProductsBinding
     private val images: ArrayList<Uri> = ArrayList()
     private val filters: ArrayList<Filter> = ArrayList()
     private val categories: ArrayList<Category> = ArrayList()
+    private val options = ArrayList<Option>()
+    private val adapter by lazy {
+        OptionAdapter(this)
+    }
     private val imageAdapter by lazy {
         ImageAdapter(this)
     }
     private val filterAdapter by lazy {
         FiltersAdapter(this)
-    }
-    private val filterDialog by lazy {
-        FilterDialog(this)
     }
     private val loading by lazy {
         LoadingDialog()
@@ -66,6 +67,7 @@ class AddProductsFragment : Fragment(), ImageAdapter.ImageClick, FilterDialogLis
         ViewModelProvider(this)[ProductViewModel::class.java]
     }
     private var catId = 0
+    private var edit = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -91,22 +93,74 @@ class AddProductsFragment : Fragment(), ImageAdapter.ImageClick, FilterDialogLis
         binding.recyclerImage.adapter = imageAdapter
         binding.recyclerImage.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.rcOptions.adapter = adapter
+        binding.rcOptions.layoutManager = LinearLayoutManager(requireContext())
         binding.quantityType = 1
         fillInternalCategories()
         binding.recyclerFilter.adapter = filterAdapter
         binding.recyclerFilter.layoutManager = LinearLayoutManager(requireContext())
-        binding.buttonAddFilter.setOnClickListener {
-            filterDialog.show(requireActivity().supportFragmentManager, "filter dialog")
-        }
         binding.buttonExpired.setOnClickListener {
             expiredQuantity()
         }
         binding.buttonAdd.setOnClickListener {
             addProduct()
         }
-        if (requireArguments().getBoolean("edit")){
+        binding.btnAddOption.setOnClickListener {
+            if (binding.editOptionArabicTitle.text.isEmpty() || binding.editOptionEnglishTitle.text.isEmpty() || binding.editOptionPrice.text.isEmpty()) {
+                Snackbar.make(requireView(), getString(R.string.empty_fields), 3000).show()
+            } else {
+                var option = Option(
+                    options.size,
+                    binding.editOptionPrice.text.toString(),
+                    binding.editOptionArabicTitle.text.toString(),
+                    binding.editOptionArabicTitle.text.toString(),
+                    binding.editOptionEnglishTitle.text.toString()
+                )
+                options.add(option)
+                adapter.data.add(option)
+                adapter.notifyDataSetChanged()
+                binding.isFillOption = true
+                binding.editOptionArabicTitle.setText("")
+                binding.editOptionEnglishTitle.setText("")
+                binding.editOptionPrice.setText("")
+            }
+        }
+        binding.buttonAddFilter.setOnClickListener {
+            if (binding.editTextFilterArabicTitle.text!!.isEmpty() || binding.editTextFilterEnglishTitle.text!!.isEmpty() ){
+                Snackbar.make(requireView(), getString(R.string.empty_fields), 3000).show()
+            } else {
+                var multiSelect = if (binding.rbPermissible.isChecked){ "multi_select" }else{ "select" }
+                val myOptions = ArrayList<Option>()
+                myOptions.clear()
+                myOptions.addAll(options)
+                val filter = Filter(
+                    0,
+                    myOptions,
+                    binding.editTextFilterArabicTitle.text.toString(),
+                    binding.editTextFilterArabicTitle.text.toString(),
+                    binding.editTextFilterEnglishTitle.text.toString(),
+                    multiSelect
+                )
+                binding.isFillOption = false
+                filters.add(filter)
+                val lang = Commons.getSharedPreferences(requireContext()).getString(Commons.LANGUAGE, "")
+                if (lang == "ar") {
+                    filterAdapter.data.add(filter.title_ar)
+                }else{
+                    filterAdapter.data.add(filter.title_en)
+                }
+                filterAdapter.notifyDataSetChanged()
+                binding.isFillFilter = true
+                binding.editTextFilterArabicTitle.setText("")
+                binding.editTextFilterEnglishTitle.setText("")
+                options.clear()
+                adapter.data.clear()
+            }
+        }
+        if (requireArguments().getString("edit") != "no"){
+            edit = true
             binding.isEdit = true
-            fillData(requireArguments().getInt("id"))
+            fillData(requireArguments().getString("id")!!.toInt())
         }
     }
 
@@ -218,7 +272,7 @@ class AddProductsFragment : Fragment(), ImageAdapter.ImageClick, FilterDialogLis
             { response ->
                 if (response.status && response.code == 200) {
                     val names = ArrayList<String>()
-                    for (i in response.data){
+                    for (i in response.data) {
                         names.add(i.cat)
                         categories.add(i)
                     }
@@ -227,7 +281,7 @@ class AddProductsFragment : Fragment(), ImageAdapter.ImageClick, FilterDialogLis
                     )
                     binding.spInternalCategory.adapter = adapter
                 } else {
-                    Snackbar.make(requireView(),response.message, 3000).show()
+                    Snackbar.make(requireView(), response.message, 3000).show()
                 }
             })
         binding.spInternalCategory.onItemSelectedListener =
@@ -239,7 +293,7 @@ class AddProductsFragment : Fragment(), ImageAdapter.ImageClick, FilterDialogLis
                     id: Long
                 ) {
                     for (i in categories) {
-                        if (binding.spInternalCategory.selectedItem.toString() == i.title) {
+                        if (binding.spInternalCategory.selectedItem.toString() == i.cat) {
                             catId = i.id
                             break
                         }
@@ -252,19 +306,6 @@ class AddProductsFragment : Fragment(), ImageAdapter.ImageClick, FilterDialogLis
             }
     }
 
-    override fun onClick(filter: Filter) {
-        filters.add(filter)
-        val lang = Commons.getSharedPreferences(requireContext()).getString(Commons.LANGUAGE, "")
-        if (lang == "ar") {
-            filterAdapter.data.add(filter.title_ar)
-        }else{
-            filterAdapter.data.add(filter.title_en)
-        }
-        filterAdapter.notifyDataSetChanged()
-        binding.isFillFilter = true
-        filterDialog.dismiss()
-    }
-
     override fun cancelClick(position: Int) {
         filters.removeAt(position)
         filterAdapter.data.removeAt(position)
@@ -275,7 +316,7 @@ class AddProductsFragment : Fragment(), ImageAdapter.ImageClick, FilterDialogLis
     }
 
     private fun expiredQuantity() {
-        val id = requireArguments().getInt("id")
+        val id = requireArguments().getString("id")!!.toInt()
         viewModel.emptyQuantity(id)
         viewModel.dataQuantity.observe(viewLifecycleOwner,
             {response->
@@ -290,8 +331,7 @@ class AddProductsFragment : Fragment(), ImageAdapter.ImageClick, FilterDialogLis
 
     private fun addProduct() {
         if (binding.editTextProductName.text!!.isEmpty() || binding.editTextQuantity.text!!.isEmpty()
-            || binding.editProcessingTime.text!!.isEmpty() || binding.editTextPrice.text!!.isEmpty()
-            || binding.editNote.text!!.isEmpty()){
+            || binding.editTextPrice.text!!.isEmpty() || binding.editNote.text!!.isEmpty()){
             Snackbar.make(requireView(), getString(R.string.empty_fields), 3000).show()
         }else{
             loading.show(requireActivity().supportFragmentManager, "loading")
@@ -321,16 +361,16 @@ class AddProductsFragment : Fragment(), ImageAdapter.ImageClick, FilterDialogLis
                     map["filters[$i][title_en]"] = toRequestBody(filter.title_en)
                     if (filter.options.isNotEmpty()){
                         for ((y, option) in filter.options.withIndex()){
-                            map["filters[options][$y][title_ar]"] = toRequestBody(option.title_ar)
-                            map["filters[options][$y][title_en]"] = toRequestBody(option.title_en)
-                            map["filters[options][$y][price]"] = toRequestBody(option.price)
+                            map["filters[$i][options][$y][title_ar]"] = toRequestBody(option.title_ar)
+                            map["filters[$i][options][$y][title_en]"] = toRequestBody(option.title_en)
+                            map["filters[$i][options][$y][price]"] = toRequestBody(option.price)
                         }
                     }
                 }
             }
 
-            if (requireArguments().getBoolean("edit")){
-                map["id"] = toRequestBody(requireArguments().getInt("id").toString())
+            if (edit){
+                map["id"] = toRequestBody(requireArguments().getString("id")!!)
                 viewModel.updateProduct(map, mapImage)
                 viewModel.dataUpdate.observe(viewLifecycleOwner,
                     { response ->
@@ -379,6 +419,15 @@ class AddProductsFragment : Fragment(), ImageAdapter.ImageClick, FilterDialogLis
 
     private fun toRequestBody(value: String): RequestBody {
         return RequestBody.create("text/plain".toMediaTypeOrNull(), value)
+    }
+
+    override fun optionCancel(position: Int) {
+        options.removeAt(position)
+        adapter.data.removeAt(position)
+        adapter.notifyDataSetChanged()
+        if (options.isEmpty()){
+            binding.isFillOption = false
+        }
     }
 
 }

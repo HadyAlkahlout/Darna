@@ -42,6 +42,7 @@
     <string name="our_product">Our Products</string>
     <string name="edit_store">Edit Store</string>
     <string name="orders">Incoming Orders</string>
+    <string name="order">Order</string>
     <string name="reports">Reports</string>
     <string name="branch">Branch</string>
     <string name="branches">Branches</string>
@@ -96,7 +97,7 @@
     <string name="product_description">Product Description</string>
     <string name="quantity_expired">Quantity Expired</string>
     <string name="add_filter">Add Filter</string>
-    <string name="add">Add</string>
+    <string name="add_option">Add Option</string>
     <string name="publish_product">Publish Product</string>
     <string name="multiple_choice">Multiple Choice</string>
     <string name="permissible">Permissible</string>
@@ -106,4 +107,14 @@
     <string name="option_arabic_title">Option Arabic Title</string>
     <string name="option_english_title">Option English Title</string>
     <string name="done_successfully">Done Successfully</string>
+    <string name="today">Today</string>
+    <string name="tomorrow">Tomorrow</string>
+    <string name="two_days">After Two Days</string>
+    <string name="three_days">After Three Days</string>
+    <string name="order_no">Order No.</string>
+    <string name="status">Status</string>
+    <string name="cost">Cost</string>
+    <string name="empty_order">There is no orders for you</string>
+    <string name="receipt_request">Receipt The Request</string>
+    <string name="rejection_request">Rejection The Request</string>
 </resources>

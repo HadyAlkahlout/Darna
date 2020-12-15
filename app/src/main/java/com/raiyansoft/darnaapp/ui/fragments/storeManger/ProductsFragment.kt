@@ -32,6 +32,7 @@ class ProductsFragment : Fragment(), ProductsAdapter.ProductClick {
     private var currentPage = 1
     private var totalAvailablePages = 1
     private var loading = false
+    private var open = 1
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,8 +42,8 @@ class ProductsFragment : Fragment(), ProductsAdapter.ProductClick {
         return binding.root
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         doInitialization()
     }
 
@@ -58,13 +59,14 @@ class ProductsFragment : Fragment(), ProductsAdapter.ProductClick {
         currentPage = 1
         totalAvailablePages = 1
         products = ArrayList()
-        adapter = ProductsAdapter(products, this)
+        adapter = ProductsAdapter(false, products, this)
         binding.recyclerProducts.setHasFixedSize(false)
         binding.recyclerProducts.adapter = adapter
         binding.recyclerProducts.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerProducts.addOnScrollListener(onScrollListener)
         getProducts()
     }
+
 
     private val onScrollListener = OnScrollListener {
         if (binding.recyclerProducts.canScrollVertically(1)) {
@@ -84,13 +86,19 @@ class ProductsFragment : Fragment(), ProductsAdapter.ProductClick {
                 loading = false
                 toggleLoading()
                 if (response != null) {
-                    totalAvailablePages = response.data.pages
                     if (response.status && response.code == 200) {
+                        totalAvailablePages = response.data.pages
+                        if (open > 1 && currentPage == 1){
+                            products.clear()
+                            adapter.data.clear()
+                            adapter.notifyDataSetChanged()
+                        }
                         if (response.data != null) {
                             var oldCount = products.size
                             adapter.data.addAll(response.data.data)
                             adapter.notifyItemRangeInserted(oldCount, products.size)
                         }
+                        open++
                     } else {
                         binding.isLoading = false
                         Snackbar.make(requireView(), response.message, 3000).show()
@@ -116,7 +124,7 @@ class ProductsFragment : Fragment(), ProductsAdapter.ProductClick {
     }
 
     override fun productClick(id: Int) {
-        val bundle = bundleOf("id" to id, "edit" to true)
+        val bundle = bundleOf("id" to "$id", "edit" to "yes")
         findNavController().navigate(
             R.id.action_productsFragment_to_addProductsFragment,
             bundle

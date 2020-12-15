@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="order"
+            type="com.raiyansoft.darnaapp.model.orders.Order" />
+
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardOrder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardElevation="4dp">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:padding="8dp"
+            android:weightSum="1"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/textOrderId"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.25"
+                android:ellipsize="end"
+                android:ems="20"
+                android:text="@{order.id}"
+                android:textAlignment="center"
+                android:textColor="@color/colorText"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/textTime"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.25"
+                android:ellipsize="end"
+                android:ems="20"
+                android:text="@{order.from_date}"
+                android:textAlignment="center"
+                android:textColor="@color/colorText"
+                android:textSize="14sp" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardStatus"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.25"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="2dp">
+
+                <TextView
+                    android:id="@+id/textStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:ellipsize="end"
+                    android:ems="20"
+                    android:text="@{order.status}"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/textPrice"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.17"
+                android:ellipsize="end"
+                android:ems="20"
+                android:text="@{order.total_cost}"
+                android:textAlignment="center"
+                android:textColor="@color/colorText"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.08"
+                android:ellipsize="end"
+                android:ems="20"
+                android:text="@string/dinar"
+                android:textAlignment="center"
+                android:textColor="@color/colorText"
+                android:textSize="14sp" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.cardview.widget.CardView>
+</layout>

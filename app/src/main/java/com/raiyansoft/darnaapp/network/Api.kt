@@ -6,6 +6,8 @@ import com.raiyansoft.darnaapp.model.city.City
 import com.raiyansoft.darnaapp.model.general.FullGeneral
 import com.raiyansoft.darnaapp.model.general.FullPagingGeneral
 import com.raiyansoft.darnaapp.model.general.General
+import com.raiyansoft.darnaapp.model.orderDetails.OrderDetails
+import com.raiyansoft.darnaapp.model.orders.Orders
 import com.raiyansoft.darnaapp.model.product.Product
 import com.raiyansoft.darnaapp.model.productDetails.ProductDetails
 import com.raiyansoft.darnaapp.model.profile.Profile
@@ -160,7 +162,7 @@ interface Api {
         @Query("page") page: Int
     ) : Response<FullPagingGeneral<Product>>
 
-    @GET("user/products/details/{id}")
+    @GET("products/details/{id}")
     suspend fun getProductDetails(
         @Header("lang") lang: String,
         @Header("Authorization") Authorization: String,
@@ -180,6 +182,7 @@ interface Api {
         @Path("id") id: Int
     ) : Response<General>
 
+    @Multipart
     @POST("products/createProduct")
     suspend fun createProduct(
         @Header("lang") lang: String,
@@ -188,6 +191,7 @@ interface Api {
         @Part images: List<MultipartBody.Part>
     ) : Response<General>
 
+    @Multipart
     @POST("products/updateProduct")
     suspend fun updateProduct(
         @Header("lang") lang: String,
@@ -208,6 +212,27 @@ interface Api {
         @Header("lang") lang: String,
         @Header("Authorization") Authorization: String,
         @Path("id") id: Int
+    ) : Response<General>
+
+    @GET("orders/getMarketOrders")
+    suspend fun getMarketOrders(
+        @Header("lang") lang: String,
+        @Header("Authorization") Authorization: String
+    ) : Response<FullGeneral<Orders>>
+
+    @GET("orders/details/{id}")
+    suspend fun marketOrderDetails(
+        @Header("lang") lang: String,
+        @Header("Authorization") Authorization: String,
+        @Path("id") id: Int
+    ) : Response<FullGeneral<OrderDetails>>
+
+    @Multipart
+    @POST("orders/changeStatus")
+    suspend fun changeOrderStatus(
+        @Header("lang") lang: String,
+        @Header("Authorization") Authorization: String,
+        @PartMap params: Map<String, @JvmSuppressWildcards RequestBody>
     ) : Response<General>
 
 }

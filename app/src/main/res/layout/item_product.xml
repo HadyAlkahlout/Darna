@@ -7,6 +7,13 @@
         <variable
             name="product"
             type="com.raiyansoft.darnaapp.model.product.Product" />
+        <variable
+            name="isSold"
+            type="Boolean" />
+        <variable
+            name="isShow"
+            type="Boolean" />
+        <import type="android.view.View"/>
     </data>
 
     <androidx.cardview.widget.CardView
@@ -37,10 +44,34 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_trach"
+                android:visibility="@{isShow ? View.GONE : View.VISIBLE, default = gone}"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:layout_width="35dp"
+                android:layout_height="50dp"
+                android:padding="4dp"
+                android:background="@drawable/background_sold_out"
+                android:layout_marginEnd="16dp"
+                android:visibility="@{isSold ? View.VISIBLE : View.GONE, default = gone}"
+                app:layout_constraintBottom_toTopOf="@id/textViewProductNote"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/imageViewDelete">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:ellipsize="end"
+                    android:text="Sold Out"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    android:textStyle="bold"/>
+
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/textViewProductTitle"
