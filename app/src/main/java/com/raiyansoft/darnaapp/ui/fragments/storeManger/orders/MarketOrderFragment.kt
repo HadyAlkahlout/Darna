@@ -1,11 +1,11 @@
-package com.raiyansoft.darnaapp.ui.fragments.storeManger
+package com.raiyansoft.darnaapp.ui.fragments.storeManger.orders
 
+import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -74,6 +74,29 @@ class MarketOrderFragment : Fragment(), ProductsAdapter.ProductClick  {
                     binding.order = response.data
                     adapter.data.addAll(response.data.products)
                     adapter.notifyDataSetChanged()
+                    when(response.data.status_id){
+                        1 -> {
+                            binding.cardStatus.setCardBackgroundColor(Color.parseColor("#AA3513"))
+                        }
+                        2 -> {
+                            binding.cardStatus.setCardBackgroundColor(Color.parseColor("#008DFF"))
+                        }
+                        3 -> {
+                            binding.cardStatus.setCardBackgroundColor(Color.parseColor("#008DFF"))
+                        }
+                        4 -> {
+                            binding.cardStatus.setCardBackgroundColor(Color.parseColor("#008DFF"))
+                        }
+                        5 -> {
+                            binding.cardStatus.setCardBackgroundColor(Color.parseColor("#29B44E"))
+                        }
+                        6 -> {
+                            binding.cardStatus.setCardBackgroundColor(Color.parseColor("#AA3513"))
+                        }
+                        7 -> {
+                            binding.cardStatus.setCardBackgroundColor(Color.parseColor("#AA3513"))
+                        }
+                    }
                     loading.dismiss()
                 } else {
                     loading.dismiss()

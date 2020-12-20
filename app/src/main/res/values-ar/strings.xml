@@ -118,4 +118,8 @@
     <string name="empty_order">لا يوجد طلبات لك</string>
     <string name="receipt_request">استلام الطلب</string>
     <string name="rejection_request">رفض الطلب</string>
+    <string name="complete_orders">الطلبات المقبولة</string>
+    <string name="canceled_orders">الطلبات الملغية</string>
+    <string name="refused_orders">الطلبات المرفوضة</string>
+    <string name="empty_reports">لا يوجد تقارير لك</string>
 </resources>

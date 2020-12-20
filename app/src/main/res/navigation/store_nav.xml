@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/registerFragment"
-        android:name="com.raiyansoft.darnaapp.ui.fragments.storeManger.RegisterFragment"
+        android:name="com.raiyansoft.darnaapp.ui.fragments.storeManger.function.RegisterFragment"
         android:label="RegisterFragment" >
         <action
             android:id="@+id/action_registerFragment_to_editStoreFragment"
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/mangerHomeFragment"
-        android:name="com.raiyansoft.darnaapp.ui.fragments.storeManger.MangerHomeFragment"
+        android:name="com.raiyansoft.darnaapp.ui.fragments.storeManger.main.MangerHomeFragment"
         android:label="fragment_manger_home"
         tools:layout="@layout/fragment_manger_home" >
         <action
@@ -71,10 +71,17 @@
             app:popExitAnim="@anim/slide_out_right"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left" />
+        <action
+            android:id="@+id/action_mangerHomeFragment_to_mainReportsFragment"
+            app:destination="@id/mainReportsFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left" />
     </fragment>
     <fragment
         android:id="@+id/editStoreFragment"
-        android:name="com.raiyansoft.darnaapp.ui.fragments.storeManger.EditStoreFragment"
+        android:name="com.raiyansoft.darnaapp.ui.fragments.storeManger.function.EditStoreFragment"
         android:label="fragment_edit_store"
         tools:layout="@layout/fragment_edit_store" >
         <action
@@ -147,7 +154,7 @@
         android:label="CallFragment" />
     <fragment
         android:id="@+id/branchesFragment"
-        android:name="com.raiyansoft.darnaapp.ui.fragments.storeManger.BranchesFragment"
+        android:name="com.raiyansoft.darnaapp.ui.fragments.storeManger.main.BranchesFragment"
         android:label="BranchesFragment" >
         <action
             android:id="@+id/action_branchesFragment_to_addBranchFragment"
@@ -159,11 +166,11 @@
     </fragment>
     <fragment
         android:id="@+id/addBranchFragment"
-        android:name="com.raiyansoft.darnaapp.ui.fragments.storeManger.AddBranchFragment"
+        android:name="com.raiyansoft.darnaapp.ui.fragments.storeManger.function.AddBranchFragment"
         android:label="AddBranchFragment" />
     <fragment
         android:id="@+id/productsFragment"
-        android:name="com.raiyansoft.darnaapp.ui.fragments.storeManger.ProductsFragment"
+        android:name="com.raiyansoft.darnaapp.ui.fragments.storeManger.main.ProductsFragment"
         android:label="ProductsFragment" >
         <action
             android:id="@+id/action_productsFragment_to_addProductsFragment"
@@ -175,7 +182,7 @@
     </fragment>
     <fragment
         android:id="@+id/addProductsFragment"
-        android:name="com.raiyansoft.darnaapp.ui.fragments.storeManger.AddProductsFragment"
+        android:name="com.raiyansoft.darnaapp.ui.fragments.storeManger.function.AddProductsFragment"
         android:label="AddProductsFragment">
         <argument android:name="edit"
             android:defaultValue="none"/>
@@ -184,7 +191,7 @@
     </fragment>
     <fragment
         android:id="@+id/marketOrdersFragment"
-        android:name="com.raiyansoft.darnaapp.ui.fragments.storeManger.MarketOrdersFragment"
+        android:name="com.raiyansoft.darnaapp.ui.fragments.storeManger.orders.MarketOrdersFragment"
         android:label="MarketOrdersFragment" >
         <action
             android:id="@+id/action_marketOrdersFragment_to_marketOrderFragment"
@@ -196,9 +203,13 @@
     </fragment>
     <fragment
         android:id="@+id/marketOrderFragment"
-        android:name="com.raiyansoft.darnaapp.ui.fragments.storeManger.MarketOrderFragment"
+        android:name="com.raiyansoft.darnaapp.ui.fragments.storeManger.orders.MarketOrderFragment"
         android:label="MarketOrderFragment">
         <argument android:name="id"
             android:defaultValue="none"/>
     </fragment>
+    <fragment
+        android:id="@+id/mainReportsFragment"
+        android:name="com.raiyansoft.darnaapp.ui.fragments.storeManger.reports.MainReportsFragment"
+        android:label="MainReportsFragment" />
 </navigation>

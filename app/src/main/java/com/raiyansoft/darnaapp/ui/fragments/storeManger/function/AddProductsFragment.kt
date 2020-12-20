@@ -1,4 +1,4 @@
-package com.raiyansoft.darnaapp.ui.fragments.storeManger
+package com.raiyansoft.darnaapp.ui.fragments.storeManger.function
 
 import android.Manifest
 import android.app.Activity

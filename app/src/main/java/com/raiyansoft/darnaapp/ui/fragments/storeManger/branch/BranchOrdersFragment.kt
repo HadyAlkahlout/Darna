@@ -1,4 +1,4 @@
-package com.raiyansoft.darnaapp.ui.fragments.storeManger
+package com.raiyansoft.darnaapp.ui.fragments.storeManger.branch
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -12,19 +12,19 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.raiyansoft.darnaapp.R
 import com.raiyansoft.darnaapp.adapters.OrderAdapter
-import com.raiyansoft.darnaapp.databinding.FragmentMarketOrdersBinding
+import com.raiyansoft.darnaapp.databinding.FragmentBranchOrdersBinding
 import com.raiyansoft.darnaapp.dialog.LoadingDialog
-import com.raiyansoft.darnaapp.ui.viewmodel.MarketOrdersViewModel
+import com.raiyansoft.darnaapp.ui.viewmodel.BranchOrdersViewModel
 
-class MarketOrdersFragment : Fragment(), OrderAdapter.OrderClick {
+class BranchOrdersFragment : Fragment(), OrderAdapter.OrderClick {
 
-    private lateinit var binding: FragmentMarketOrdersBinding
+    private lateinit var binding: FragmentBranchOrdersBinding
     private lateinit var todayAdapter: OrderAdapter
     private lateinit var tomorrowAdapter: OrderAdapter
     private lateinit var twoDaysAdapter: OrderAdapter
     private lateinit var threeDaysAdapter: OrderAdapter
     private val viewHolder by lazy {
-        ViewModelProvider(this)[MarketOrdersViewModel::class.java]
+        ViewModelProvider(this)[BranchOrdersViewModel::class.java]
     }
     private val loading by lazy {
         LoadingDialog()
@@ -34,7 +34,7 @@ class MarketOrdersFragment : Fragment(), OrderAdapter.OrderClick {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentMarketOrdersBinding.inflate(inflater, container, false)
+        binding = FragmentBranchOrdersBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -107,7 +107,7 @@ class MarketOrdersFragment : Fragment(), OrderAdapter.OrderClick {
     override fun orderClick(id: Int) {
         val bundle = bundleOf("id" to id)
         findNavController().navigate(
-            R.id.action_marketOrdersFragment_to_marketOrderFragment,
+            R.id.action_branchOrdersFragment_to_marketOrderFragment2,
             bundle
         )
     }

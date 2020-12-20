@@ -117,4 +117,10 @@
     <string name="empty_order">There is no orders for you</string>
     <string name="receipt_request">Receipt The Request</string>
     <string name="rejection_request">Rejection The Request</string>
+    <string name="complete_orders">Complete Orders</string>
+    <string name="canceled_orders">Canceled Orders</string>
+    <string name="refused_orders">Refused Orders</string>
+    <string name="empty_reports">There is no reports for you</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

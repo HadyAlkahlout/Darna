@@ -14,7 +14,7 @@ import com.raiyansoft.darnaapp.uitl.Commons
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody
 
-class StoreStatusDialog(val listener: CustomDialogListener) : DialogFragment() {
+class StoreStatusDialog(var type: Int, val listener: CustomDialogListener) : DialogFragment() {
 
     private lateinit var binding: DialogeStoreStatusBinding
     private val loading by lazy {
@@ -61,7 +61,11 @@ class StoreStatusDialog(val listener: CustomDialogListener) : DialogFragment() {
             }
             val map: MutableMap<String, RequestBody> = HashMap()
             map["status"] = toRequestBody(status.toString())
-            viewModel.changeMarketStatus(map)
+            if (type == 0) {
+                viewModel.changeMarketStatus(map)
+            } else {
+                viewModel.changeBranchStatus(map)
+            }
             viewModel.dataStatus.observe(viewLifecycleOwner,
                 { response ->
                     if (response.status && response.code == 200) {

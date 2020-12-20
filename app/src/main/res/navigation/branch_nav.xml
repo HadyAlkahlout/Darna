@@ -5,7 +5,7 @@
 
     <fragment
         android:id="@+id/branchHomeFragment"
-        android:name="com.raiyansoft.darnaapp.ui.fragments.branch.BranchHomeFragment"
+        android:name="com.raiyansoft.darnaapp.ui.fragments.storeManger.branch.BranchHomeFragment"
         android:label="BranchHomeFragment" >
         <action
             android:id="@+id/action_branchHomeFragment_to_settingsFragment"
@@ -14,6 +14,13 @@
             app:popExitAnim="@anim/slide_out_right"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"  />
+        <action
+            android:id="@+id/action_branchHomeFragment_to_branchOrdersFragment"
+            app:destination="@id/branchOrdersFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
@@ -75,4 +82,23 @@
         android:id="@+id/callFragment"
         android:name="com.raiyansoft.darnaapp.ui.fragments.settings.CallFragment"
         android:label="CallFragment" />
+    <fragment
+        android:id="@+id/branchOrdersFragment"
+        android:name="com.raiyansoft.darnaapp.ui.fragments.storeManger.branch.BranchOrdersFragment"
+        android:label="BranchOrdersFragment" >
+        <action
+            android:id="@+id/action_branchOrdersFragment_to_marketOrderFragment2"
+            app:destination="@id/marketOrderFragment2"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left" />
+    </fragment>
+    <fragment
+        android:id="@+id/marketOrderFragment2"
+        android:name="com.raiyansoft.darnaapp.ui.fragments.storeManger.orders.MarketOrderFragment"
+        android:label="MarketOrderFragment">
+        <argument android:name="id"
+            android:defaultValue="none"/>
+    </fragment>
 </navigation>

@@ -7,6 +7,7 @@ import com.raiyansoft.darnaapp.model.general.FullGeneral
 import com.raiyansoft.darnaapp.model.general.FullPagingGeneral
 import com.raiyansoft.darnaapp.model.general.General
 import com.raiyansoft.darnaapp.model.orderDetails.OrderDetails
+import com.raiyansoft.darnaapp.model.orders.Order
 import com.raiyansoft.darnaapp.model.orders.Orders
 import com.raiyansoft.darnaapp.model.product.Product
 import com.raiyansoft.darnaapp.model.productDetails.ProductDetails
@@ -92,14 +93,6 @@ interface Api {
     @Multipart
     @POST("user/completeRegister")
     suspend fun completeRegister(
-        @Header("lang") lang: String,
-        @Header("Authorization") Authorization: String,
-        @PartMap params: Map<String, @JvmSuppressWildcards RequestBody>
-    ) : Response<General>
-
-    @Multipart
-    @POST("user/completeDeliveryRegister")
-    suspend fun completeDeliveryRegister(
         @Header("lang") lang: String,
         @Header("Authorization") Authorization: String,
         @PartMap params: Map<String, @JvmSuppressWildcards RequestBody>
@@ -230,6 +223,55 @@ interface Api {
     @Multipart
     @POST("orders/changeStatus")
     suspend fun changeOrderStatus(
+        @Header("lang") lang: String,
+        @Header("Authorization") Authorization: String,
+        @PartMap params: Map<String, @JvmSuppressWildcards RequestBody>
+    ) : Response<General>
+
+    @GET("orders/ordersReports/complete")
+    suspend fun completeMarketOrder(
+        @Header("lang") lang: String,
+        @Header("Authorization") Authorization: String,
+        @Query("from") from: String,
+        @Query("to") to: String,
+        @Query("page") page: Int
+    ) : Response<FullPagingGeneral<Order>>
+
+    @GET("orders/ordersReports/canceled")
+    suspend fun canceledMarketOrder(
+        @Header("lang") lang: String,
+        @Header("Authorization") Authorization: String,
+        @Query("from") from: String,
+        @Query("to") to: String,
+        @Query("page") page: Int
+    ) : Response<FullPagingGeneral<Order>>
+
+    @GET("orders/ordersReports/refused")
+    suspend fun refusedMarketOrder(
+        @Header("lang") lang: String,
+        @Header("Authorization") Authorization: String,
+        @Query("from") from: String,
+        @Query("to") to: String,
+        @Query("page") page: Int
+    ) : Response<FullPagingGeneral<Order>>
+
+    @Multipart
+    @POST("user/employee/status")
+    suspend fun changeBranchStatus(
+        @Header("lang") lang: String,
+        @Header("Authorization") Authorization: String,
+        @PartMap params: Map<String, @JvmSuppressWildcards RequestBody>
+    ) : Response<General>
+
+    @GET("orders/getEmployeeOrders")
+    suspend fun getBranchOrders(
+        @Header("lang") lang: String,
+        @Header("Authorization") Authorization: String
+    ) : Response<FullGeneral<Orders>>
+
+    @Multipart
+    @POST("user/completeDeliveryRegister")
+    suspend fun completeDeliveryRegister(
         @Header("lang") lang: String,
         @Header("Authorization") Authorization: String,
         @PartMap params: Map<String, @JvmSuppressWildcards RequestBody>

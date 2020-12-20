@@ -1,4 +1,4 @@
-package com.raiyansoft.darnaapp.ui.fragments.storeManger
+package com.raiyansoft.darnaapp.ui.fragments.storeManger.main
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -27,7 +27,7 @@ class MangerHomeFragment : Fragment(), View.OnClickListener, CustomDialogListene
         ViewModelProvider(this)[ProfileViewModel::class.java]
     }
     private val statusDialog by lazy {
-        StoreStatusDialog(this)
+        StoreStatusDialog(0, this)
     }
 
     override fun onCreateView(
@@ -97,10 +97,10 @@ class MangerHomeFragment : Fragment(), View.OnClickListener, CustomDialogListene
                 findNavController().navigate(R.id.action_mangerHomeFragment_to_marketOrdersFragment)
             }
             R.id.buttonReports -> {
-                Snackbar.make(requireView(), getString(R.string.reports), 5000).show()
+                findNavController().navigate(R.id.action_mangerHomeFragment_to_mainReportsFragment)
             }
             R.id.buttonBranch -> {
-                Snackbar.make(requireView(), getString(R.string.branch), 5000).show()
+                //Nothing
             }
             R.id.buttonBranches -> {
                 findNavController().navigate(R.id.action_mangerHomeFragment_to_branchesFragment)

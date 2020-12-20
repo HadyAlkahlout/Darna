@@ -1,4 +1,4 @@
-package com.raiyansoft.darnaapp.ui.fragments.branch
+package com.raiyansoft.darnaapp.ui.fragments.storeManger.branch
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,9 +11,12 @@ import com.google.android.material.snackbar.Snackbar
 import com.raiyansoft.darnaapp.R
 import com.raiyansoft.darnaapp.databinding.FragmentBranchHomeBinding
 import com.raiyansoft.darnaapp.dialog.LoadingDialog
+import com.raiyansoft.darnaapp.dialog.StoreStatusDialog
+import com.raiyansoft.darnaapp.listeners.CustomDialogListener
 import com.raiyansoft.darnaapp.ui.viewmodel.ProfileViewModel
+import com.raiyansoft.darnaapp.uitl.Commons
 
-class BranchHomeFragment : Fragment(), View.OnClickListener {
+class BranchHomeFragment : Fragment(), View.OnClickListener, CustomDialogListener {
 
     private lateinit var binding: FragmentBranchHomeBinding
     private val loading by lazy {
@@ -21,6 +24,9 @@ class BranchHomeFragment : Fragment(), View.OnClickListener {
     }
     private val viewModel by lazy {
         ViewModelProvider(this)[ProfileViewModel::class.java]
+    }
+    private val statusDialog by lazy {
+        StoreStatusDialog(1, this)
     }
 
     override fun onCreateView(
@@ -42,9 +48,12 @@ class BranchHomeFragment : Fragment(), View.OnClickListener {
         viewModel.dataProfile.observe(viewLifecycleOwner,
             {response->
                 if (response.status && response.code == 200){
-                    binding.storeName = response.data.branch_name
+                    binding.storeName = response.data.market_name
+                    binding.branch = response.data.branch_name
                     binding.orders = response.data.orders.toString()
                     binding.image = response.data.avatar
+                    Commons.getSharedEditor(requireContext())
+                        .putInt(Commons.StoreStatus, response.data.market_status).apply()
                     loading.dismiss()
                 }else{
                     Snackbar.make(requireView(), response.message, 5000).show()
@@ -59,18 +68,19 @@ class BranchHomeFragment : Fragment(), View.OnClickListener {
     override fun onClick(v: View?) {
         when(v!!.id){
             R.id.buttonStatus -> {
-                Snackbar.make(requireView(), getString(R.string.store_status), 5000).show()
+                statusDialog.show(requireActivity().supportFragmentManager, "status dialog")
             }
             R.id.buttonIncomingOrders -> {
-                Snackbar.make(requireView(), getString(R.string.orders), 5000).show()
-            }
-            R.id.buttonBranch -> {
-                Snackbar.make(requireView(), getString(R.string.branch), 5000).show()
+                findNavController().navigate(R.id.action_branchHomeFragment_to_branchOrdersFragment)
             }
             R.id.imageViewSettings -> {
                 findNavController().navigate(R.id.action_branchHomeFragment_to_settingsFragment)
             }
         }
+    }
+
+    override fun onClick(type: Int) {
+        statusDialog.dismiss()
     }
 
 }

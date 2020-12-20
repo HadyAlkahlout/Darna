@@ -1,4 +1,4 @@
-package com.raiyansoft.darnaapp.ui.fragments.storeManger
+package com.raiyansoft.darnaapp.ui.fragments.storeManger.main
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -14,7 +14,6 @@ import com.raiyansoft.darnaapp.R
 import com.raiyansoft.darnaapp.adapters.ProductsAdapter
 import com.raiyansoft.darnaapp.databinding.FragmentProductsBinding
 import com.raiyansoft.darnaapp.dialog.LoadingDialog
-import com.raiyansoft.darnaapp.model.product.Product
 import com.raiyansoft.darnaapp.ui.viewmodel.ProductViewModel
 import com.raiyansoft.darnaapp.uitl.OnScrollListener
 
@@ -27,7 +26,6 @@ class ProductsFragment : Fragment(), ProductsAdapter.ProductClick {
     private val loadingDialoge by lazy {
         LoadingDialog()
     }
-    private lateinit var products: ArrayList<Product>
     private lateinit var adapter: ProductsAdapter
     private var currentPage = 1
     private var totalAvailablePages = 1
@@ -58,15 +56,13 @@ class ProductsFragment : Fragment(), ProductsAdapter.ProductClick {
     private fun doWork() {
         currentPage = 1
         totalAvailablePages = 1
-        products = ArrayList()
-        adapter = ProductsAdapter(false, products, this)
+        adapter = ProductsAdapter(false, ArrayList(), this)
         binding.recyclerProducts.setHasFixedSize(false)
         binding.recyclerProducts.adapter = adapter
         binding.recyclerProducts.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerProducts.addOnScrollListener(onScrollListener)
         getProducts()
     }
-
 
     private val onScrollListener = OnScrollListener {
         if (binding.recyclerProducts.canScrollVertically(1)) {
@@ -89,14 +85,13 @@ class ProductsFragment : Fragment(), ProductsAdapter.ProductClick {
                     if (response.status && response.code == 200) {
                         totalAvailablePages = response.data.pages
                         if (open > 1 && currentPage == 1){
-                            products.clear()
                             adapter.data.clear()
                             adapter.notifyDataSetChanged()
                         }
                         if (response.data != null) {
-                            var oldCount = products.size
+                            var oldCount = adapter.data.size
                             adapter.data.addAll(response.data.data)
-                            adapter.notifyItemRangeInserted(oldCount, products.size)
+                            adapter.notifyItemRangeInserted(oldCount, adapter.data.size)
                         }
                         open++
                     } else {

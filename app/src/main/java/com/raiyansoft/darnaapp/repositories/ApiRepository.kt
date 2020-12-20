@@ -6,6 +6,7 @@ import com.raiyansoft.darnaapp.network.ServiceBuilder
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.http.Part
+import retrofit2.http.Query
 
 class ApiRepository {
 
@@ -46,13 +47,6 @@ class ApiRepository {
         params: Map<String, RequestBody>
     ) =
         ServiceBuilder.apis!!.completeRegister(lang, Authorization, params)
-
-    suspend fun completeDeliveryRegister(
-        lang: String,
-        Authorization: String,
-        params: Map<String, RequestBody>
-    ) =
-        ServiceBuilder.apis!!.completeDeliveryRegister(lang, Authorization, params)
 
     suspend fun getCategories(lang: String, Authorization: String) =
         ServiceBuilder.apis!!.getCategories(lang, Authorization)
@@ -164,5 +158,52 @@ class ApiRepository {
         params: Map<String, RequestBody>
     ) =
         ServiceBuilder.apis!!.changeOrderStatus(lang, Authorization, params)
+
+    suspend fun completeMarketOrder(
+        lang: String,
+        Authorization: String,
+        from: String,
+        to: String,
+        page: Int
+    ) =
+        ServiceBuilder.apis!!.completeMarketOrder(lang, Authorization, from, to, page)
+
+    suspend fun canceledMarketOrder(
+        lang: String,
+        Authorization: String,
+        from: String,
+        to: String,
+        page: Int
+    ) =
+        ServiceBuilder.apis!!.canceledMarketOrder(lang, Authorization, from, to, page)
+
+    suspend fun refusedMarketOrder(
+        lang: String,
+        Authorization: String,
+        from: String,
+        to: String,
+        page: Int
+    ) =
+        ServiceBuilder.apis!!.refusedMarketOrder(lang, Authorization, from, to, page)
+
+    suspend fun changeBranchStatus(
+        lang: String,
+        Authorization: String,
+        params: Map<String, RequestBody>
+    ) =
+        ServiceBuilder.apis!!.changeBranchStatus(lang, Authorization, params)
+
+    suspend fun getBranchOrders(
+        lang: String,
+        Authorization: String
+    ) =
+        ServiceBuilder.apis!!.getBranchOrders(lang, Authorization)
+
+    suspend fun completeDeliveryRegister(
+        lang: String,
+        Authorization: String,
+        params: Map<String, RequestBody>
+    ) =
+        ServiceBuilder.apis!!.completeDeliveryRegister(lang, Authorization, params)
 
 }

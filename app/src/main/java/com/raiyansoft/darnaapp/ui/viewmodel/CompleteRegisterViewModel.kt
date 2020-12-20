@@ -50,6 +50,13 @@ class CompleteRegisterViewModel(application: Application) : AndroidViewModel(app
         }
     }
 
+    private suspend fun branchStatus(params: Map<String, RequestBody>) {
+        val response = repository.changeBranchStatus(lang, token, params)
+        if (response.isSuccessful){
+            dataStatus.postValue(response.body())
+        }
+    }
+
     fun completeRegister(params: Map<String, RequestBody>){
         viewModelScope.launch {
             sendData(params)
@@ -71,6 +78,12 @@ class CompleteRegisterViewModel(application: Application) : AndroidViewModel(app
     fun changeMarketStatus(params: Map<String, RequestBody>){
         viewModelScope.launch {
             status(params)
+        }
+    }
+
+    fun changeBranchStatus(params: Map<String, RequestBody>){
+        viewModelScope.launch {
+            branchStatus(params)
         }
     }
 
