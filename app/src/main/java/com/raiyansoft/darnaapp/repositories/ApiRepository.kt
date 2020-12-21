@@ -206,4 +206,85 @@ class ApiRepository {
     ) =
         ServiceBuilder.apis!!.completeDeliveryRegister(lang, Authorization, params)
 
+    suspend fun getLocations(
+        lang: String,
+        Authorization: String
+    ) =
+        ServiceBuilder.apis!!.getLocations(lang, Authorization)
+
+    suspend fun deleteLocation(
+        lang: String,
+        Authorization: String,
+        id: Int
+    ) =
+        ServiceBuilder.apis!!.deleteLocation(lang, Authorization, id)
+
+    suspend fun createLocation(
+        lang: String,
+        Authorization: String,
+        params: Map<String, RequestBody>
+    ) =
+        ServiceBuilder.apis!!.createLocation(lang, Authorization, params)
+
+    suspend fun updateAvatar(
+        lang: String,
+        Authorization: String,
+        avatar: MultipartBody.Part
+    ) =
+        ServiceBuilder.apis!!.updateAvatar(lang, Authorization, avatar)
+
+    suspend fun updateDeliveryProfile(
+        lang: String,
+        Authorization: String,
+        params: Map<String, RequestBody>
+    ) =
+        ServiceBuilder.apis!!.updateDeliveryProfile(lang, Authorization, params)
+
+    suspend fun getDrivers(
+        lang: String,
+        Authorization: String
+    ) =
+        ServiceBuilder.apis!!.getDrivers(lang, Authorization)
+
+    suspend fun deleteDriver(
+        lang: String,
+        Authorization: String,
+        id: Int
+    ) =
+        ServiceBuilder.apis!!.deleteDriver(lang, Authorization, id)
+
+    suspend fun createDriver(
+        lang: String,
+        Authorization: String,
+        params: Map<String, RequestBody>
+    ) =
+        ServiceBuilder.apis!!.createDriver(lang, Authorization, params)
+
+    suspend fun completeDeliveryOrder(
+        lang: String,
+        Authorization: String,
+        from: String,
+        to: String,
+        page: Int
+    ) =
+        ServiceBuilder.apis!!.completeMarketOrder(lang, Authorization, from, to, page)
+
+    suspend fun canceledDeliveryOrder(
+        lang: String,
+        Authorization: String,
+        from: String,
+        to: String,
+        page: Int
+    ) =
+        ServiceBuilder.apis!!.canceledMarketOrder(lang, Authorization, from, to, page)
+
+    suspend fun refusedDeliveryOrder(
+        lang: String,
+        Authorization: String,
+        from: String,
+        to: String,
+        page: Int
+    ) =
+        ServiceBuilder.apis!!.refusedMarketOrder(lang, Authorization, from, to, page)
+
 }

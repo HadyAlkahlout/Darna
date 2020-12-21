@@ -5,7 +5,7 @@
 
     <fragment
         android:id="@+id/deliveryHomeFragment"
-        android:name="com.raiyansoft.darnaapp.ui.fragments.delivery.DeliveryHomeFragment"
+        android:name="com.raiyansoft.darnaapp.ui.fragments.delivery.home.DeliveryHomeFragment"
         android:label="DeliveryHomeFragment" >
         <action
             android:id="@+id/action_deliveryHomeFragment_to_settingsFragment"
@@ -17,6 +17,34 @@
         <action
             android:id="@+id/action_deliveryHomeFragment_to_deliveryRegisterFragment"
             app:destination="@id/deliveryRegisterFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left" />
+        <action
+            android:id="@+id/action_deliveryHomeFragment_to_locationsFragment"
+            app:destination="@id/locationsFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left" />
+        <action
+            android:id="@+id/action_deliveryHomeFragment_to_editDeliveryProfileFragment"
+            app:destination="@id/editDeliveryProfileFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left" />
+        <action
+            android:id="@+id/action_deliveryHomeFragment_to_driversFragment"
+            app:destination="@id/driversFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left" />
+        <action
+            android:id="@+id/action_deliveryHomeFragment_to_mainDeliveryReportsFragment"
+            app:destination="@id/mainDeliveryReportsFragment"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
             app:enterAnim="@anim/slide_in_right"
@@ -84,6 +112,46 @@
         android:label="CallFragment" />
     <fragment
         android:id="@+id/deliveryRegisterFragment"
-        android:name="com.raiyansoft.darnaapp.ui.fragments.delivery.DeliveryRegisterFragment"
+        android:name="com.raiyansoft.darnaapp.ui.fragments.delivery.register.DeliveryRegisterFragment"
         android:label="DeliveryRegisterFragment" />
+    <fragment
+        android:id="@+id/locationsFragment"
+        android:name="com.raiyansoft.darnaapp.ui.fragments.delivery.location.LocationsFragment"
+        android:label="LocationsFragment" >
+        <action
+            android:id="@+id/action_locationsFragment_to_addLocationFragment"
+            app:destination="@id/addLocationFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left" />
+    </fragment>
+    <fragment
+        android:id="@+id/addLocationFragment"
+        android:name="com.raiyansoft.darnaapp.ui.fragments.delivery.location.AddLocationFragment"
+        android:label="AddLocationFragment" />
+    <fragment
+        android:id="@+id/editDeliveryProfileFragment"
+        android:name="com.raiyansoft.darnaapp.ui.fragments.delivery.profile.EditDeliveryProfileFragment"
+        android:label="EditDeliveryProfileFragment" />
+    <fragment
+        android:id="@+id/driversFragment"
+        android:name="com.raiyansoft.darnaapp.ui.fragments.delivery.driver.DriversFragment"
+        android:label="DriversFragment" >
+        <action
+            android:id="@+id/action_driversFragment_to_addDriverFragment"
+            app:destination="@id/addDriverFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left" />
+    </fragment>
+    <fragment
+        android:id="@+id/addDriverFragment"
+        android:name="com.raiyansoft.darnaapp.ui.fragments.delivery.driver.AddDriverFragment"
+        android:label="AddDriverFragment" />
+    <fragment
+        android:id="@+id/mainDeliveryReportsFragment"
+        android:name="com.raiyansoft.darnaapp.ui.fragments.delivery.reports.MainDeliveryReportsFragment"
+        android:label="MainDeliveryReportsFragment" />
 </navigation>

@@ -23,6 +23,7 @@
     <string name="register">التسجيل</string>
     <string name="register_btn">تسجيل حساب جديد</string>
     <string name="your_name">اسمك</string>
+    <string name="the_name">الاسم</string>
     <string name="store_name">اسم المتجر</string>
     <string name="company_name">اسم الشركة</string>
     <string name="email">الايميل</string>
@@ -68,7 +69,7 @@
     <string name="add_branch">اضافة فرع جديد</string>
     <string name="no_branch">لا يوجد لشركتك فروع</string>
     <string name="delete_result">تم حذف الفرع بنجاح</string>
-    <string name="add_result">تم اضافة الفرع بنجاح</string>
+    <string name="add_result">تم اضافة العنصر بنجاح</string>
     <string name="city">المحافظة</string>
     <string name="region">المنطقة</string>
     <string name="about">النبذة</string>
@@ -122,4 +123,9 @@
     <string name="canceled_orders">الطلبات الملغية</string>
     <string name="refused_orders">الطلبات المرفوضة</string>
     <string name="empty_reports">لا يوجد تقارير لك</string>
+    <string name="add_location">اضافة محافظة</string>
+    <string name="add_driver">اضافة سائق</string>
+    <string name="empty_locations">لا يوجد محافظات</string>
+    <string name="empty_drivers">لا يوجد سائقين</string>
+    <string name="starting_location">لوكيشن الانطلاق</string>
 </resources>

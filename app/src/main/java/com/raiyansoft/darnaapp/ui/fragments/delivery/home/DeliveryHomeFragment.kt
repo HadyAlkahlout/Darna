@@ -1,4 +1,4 @@
-package com.raiyansoft.darnaapp.ui.fragments.delivery
+package com.raiyansoft.darnaapp.ui.fragments.delivery.home
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -39,11 +39,20 @@ class DeliveryHomeFragment : Fragment(), View.OnClickListener {
         binding.buttonDrivers.setOnClickListener(this)
         binding.buttonReports.setOnClickListener(this)
         binding.imageViewSettings.setOnClickListener(this)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        getData()
+    }
+
+    private fun getData() {
         viewModel.dataProfile.observe(viewLifecycleOwner,
             {response->
                 if (response.status && response.code == 200){
                     binding.companyName = response.data.company_name
                     binding.orders = response.data.orders.toString()
+                    binding.image = response.data.avatar
                     if (response.data.company_name == ""){
                         findNavController().navigate(R.id.action_deliveryHomeFragment_to_deliveryRegisterFragment)
                     }
@@ -56,19 +65,19 @@ class DeliveryHomeFragment : Fragment(), View.OnClickListener {
     override fun onClick(v: View?) {
         when(v!!.id){
             R.id.buttonCoverageAreas -> {
-                Snackbar.make(requireView(), getString(R.string.coverage_areas), 5000).show()
+                findNavController().navigate(R.id.action_deliveryHomeFragment_to_locationsFragment)
             }
             R.id.buttonIncomingOrders -> {
                 Snackbar.make(requireView(), getString(R.string.orders), 5000).show()
             }
             R.id.buttonEditAccount -> {
-                Snackbar.make(requireView(), getString(R.string.edit_account), 5000).show()
+                findNavController().navigate(R.id.action_deliveryHomeFragment_to_editDeliveryProfileFragment)
             }
             R.id.buttonDrivers -> {
-                Snackbar.make(requireView(), getString(R.string.drivers), 5000).show()
+                findNavController().navigate(R.id.action_deliveryHomeFragment_to_driversFragment)
             }
             R.id.buttonReports -> {
-                Snackbar.make(requireView(), getString(R.string.reports), 5000).show()
+                findNavController().navigate(R.id.action_deliveryHomeFragment_to_mainDeliveryReportsFragment)
             }
             R.id.imageViewSettings -> {
                 findNavController().navigate(R.id.action_deliveryHomeFragment_to_settingsFragment)

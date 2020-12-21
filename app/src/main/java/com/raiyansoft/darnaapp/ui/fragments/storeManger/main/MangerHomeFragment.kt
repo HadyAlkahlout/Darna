@@ -60,6 +60,7 @@ class MangerHomeFragment : Fragment(), View.OnClickListener, CustomDialogListene
                         findNavController().navigate(R.id.action_mangerHomeFragment_to_registerFragment)
                     }
                 } else {
+                    loading.dismiss()
                     Snackbar.make(requireView(), response.message, 5000).show()
                 }
             })

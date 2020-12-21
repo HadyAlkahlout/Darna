@@ -22,6 +22,7 @@
     <string name="register">Register</string>
     <string name="register_btn">Register New Account</string>
     <string name="your_name">Your Name</string>
+    <string name="the_name">The Name</string>
     <string name="store_name">Store Name</string>
     <string name="company_name">Company Name</string>
     <string name="email">Email</string>
@@ -67,7 +68,7 @@
     <string name="add_branch">Add New Branch</string>
     <string name="no_branch">There is no branches for your company</string>
     <string name="delete_result">Branch has deleted successfully</string>
-    <string name="add_result">Branch has added successfully</string>
+    <string name="add_result">Item has added successfully</string>
     <string name="city">City</string>
     <string name="region">Region</string>
     <string name="about">About you</string>
@@ -121,6 +122,11 @@
     <string name="canceled_orders">Canceled Orders</string>
     <string name="refused_orders">Refused Orders</string>
     <string name="empty_reports">There is no reports for you</string>
+    <string name="add_location">Add Location</string>
+    <string name="add_driver">Add Driver</string>
+    <string name="empty_locations">There is no locations</string>
+    <string name="empty_drivers">There is no drivers</string>
+    <string name="starting_location">Starting Location</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

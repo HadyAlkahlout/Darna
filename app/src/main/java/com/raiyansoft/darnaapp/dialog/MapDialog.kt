@@ -35,7 +35,7 @@ class MapDialog(var lat: Double, var long: Double, var listener: MapDialogListen
                 long = latLng.longitude
             }
         } else {
-            binding.buttonSave.visibility = View.GONE
+            binding.layout.visibility = View.GONE
             loc = LatLng(lat, long)
             val marker = MarkerOptions()
             marker.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))

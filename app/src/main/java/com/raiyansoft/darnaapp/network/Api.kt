@@ -3,9 +3,11 @@ package com.raiyansoft.darnaapp.network
 import com.raiyansoft.darnaapp.model.branch.Branch
 import com.raiyansoft.darnaapp.model.categories.Category
 import com.raiyansoft.darnaapp.model.city.City
+import com.raiyansoft.darnaapp.model.driver.Driver
 import com.raiyansoft.darnaapp.model.general.FullGeneral
 import com.raiyansoft.darnaapp.model.general.FullPagingGeneral
 import com.raiyansoft.darnaapp.model.general.General
+import com.raiyansoft.darnaapp.model.location.Location
 import com.raiyansoft.darnaapp.model.orderDetails.OrderDetails
 import com.raiyansoft.darnaapp.model.orders.Order
 import com.raiyansoft.darnaapp.model.orders.Orders
@@ -276,5 +278,90 @@ interface Api {
         @Header("Authorization") Authorization: String,
         @PartMap params: Map<String, @JvmSuppressWildcards RequestBody>
     ) : Response<General>
+
+    @GET("user/getLocations")
+    suspend fun getLocations(
+        @Header("lang") lang: String,
+        @Header("Authorization") Authorization: String
+    ) : Response<FullGeneral<List<Location>>>
+
+    @GET("user/deleteLocation/{id}")
+    suspend fun deleteLocation(
+        @Header("lang") lang: String,
+        @Header("Authorization") Authorization: String,
+        @Path("id") id: Int
+    ) : Response<General>
+
+    @Multipart
+    @POST("user/createLocation")
+    suspend fun createLocation(
+        @Header("lang") lang: String,
+        @Header("Authorization") Authorization: String,
+        @PartMap params: Map<String, @JvmSuppressWildcards RequestBody>
+    ) : Response<General>
+
+    @Multipart
+    @POST("user/update/avatar")
+    suspend fun updateAvatar(
+        @Header("lang") lang: String,
+        @Header("Authorization") Authorization: String,
+        @Part avatar: MultipartBody.Part
+    ) : Response<General>
+
+    @Multipart
+    @POST("user/updateDeliveryProfile")
+    suspend fun updateDeliveryProfile(
+        @Header("lang") lang: String,
+        @Header("Authorization") Authorization: String,
+        @PartMap params: Map<String, @JvmSuppressWildcards RequestBody>
+    ) : Response<General>
+
+    @GET("user/getDrivers")
+    suspend fun getDrivers(
+        @Header("lang") lang: String,
+        @Header("Authorization") Authorization: String
+    ) : Response<FullGeneral<List<Driver>>>
+
+    @GET("user/deleteDriver/{id}")
+    suspend fun deleteDriver(
+        @Header("lang") lang: String,
+        @Header("Authorization") Authorization: String,
+        @Path("id") id: Int
+    ) : Response<General>
+
+    @Multipart
+    @POST("user/createDriver")
+    suspend fun createDriver(
+        @Header("lang") lang: String,
+        @Header("Authorization") Authorization: String,
+        @PartMap params: Map<String, @JvmSuppressWildcards RequestBody>
+    ) : Response<General>
+
+    @GET("orders/ordersDeliveryReports/complete")
+    suspend fun completeDeliveryOrder(
+        @Header("lang") lang: String,
+        @Header("Authorization") Authorization: String,
+        @Query("from") from: String,
+        @Query("to") to: String,
+        @Query("page") page: Int
+    ) : Response<FullPagingGeneral<Order>>
+
+    @GET("orders/ordersDeliveryReports/canceled")
+    suspend fun canceledDeliveryOrder(
+        @Header("lang") lang: String,
+        @Header("Authorization") Authorization: String,
+        @Query("from") from: String,
+        @Query("to") to: String,
+        @Query("page") page: Int
+    ) : Response<FullPagingGeneral<Order>>
+
+    @GET("orders/ordersDeliveryReports/refused")
+    suspend fun refusedDeliveryOrder(
+        @Header("lang") lang: String,
+        @Header("Authorization") Authorization: String,
+        @Query("from") from: String,
+        @Query("to") to: String,
+        @Query("page") page: Int
+    ) : Response<FullPagingGeneral<Order>>
 
 }

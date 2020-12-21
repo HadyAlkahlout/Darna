@@ -4,9 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
+        <variable
+            name="image"
+            type="String" />
+
         <variable
             name="companyName"
             type="String" />
+
         <variable
             name="orders"
             type="String" />
@@ -16,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
-        tools:context=".ui.fragments.delivery.DeliveryHomeFragment">
+        tools:context=".ui.fragments.delivery.home.DeliveryHomeFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -64,6 +70,23 @@
 
             </androidx.cardview.widget.CardView>
 
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/imgDelivery"
+                android:layout_width="106dp"
+                android:layout_height="106dp"
+                android:layout_marginTop="24dp"
+                android:scaleType="centerCrop"
+                android:imageURL="@{image}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardView"
+                app:riv_border_color="@color/colorPrimary"
+                app:riv_border_width="2dip"
+                app:riv_corner_radius="30dip"
+                app:riv_mutate_background="true"
+                app:riv_oval="true"
+                app:riv_tile_mode="clamp" />
+
             <LinearLayout
                 android:id="@+id/layout"
                 android:layout_width="match_parent"
@@ -74,7 +97,7 @@
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardView">
+                app:layout_constraintTop_toBottomOf="@+id/imgDelivery">
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/buttonCoverageAreas"
