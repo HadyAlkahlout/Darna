@@ -10,8 +10,14 @@
             type="String" />
 
         <variable
+            name="isWaiting"
+            type="Boolean" />
+
+        <variable
             name="order"
             type="com.raiyansoft.darnaapp.model.orderDetails.OrderDetails" />
+
+        <import type="android.view.View"/>
 
     </data>
 
@@ -81,6 +87,7 @@
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="24dp"
+                android:visibility="@{isWaiting ? View.VISIBLE : View.GONE}"
                 android:text="@string/receipt_request"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
@@ -96,6 +103,7 @@
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="24dp"
+                android:visibility="@{isWaiting ? View.VISIBLE : View.GONE}"
                 android:backgroundTint="@android:color/holo_red_dark"
                 android:text="@string/rejection_request"
                 android:textAllCaps="false"

@@ -18,5 +18,6 @@ data class Driver(
     @SerializedName("region_id")
     val region_id: Int,
     @SerializedName("title")
-    val title: String
+    val title: String,
+    var isSelect: Boolean = false
 )

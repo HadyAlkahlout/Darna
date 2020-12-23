@@ -8,6 +8,12 @@
             name="driver"
             type="com.raiyansoft.darnaapp.model.driver.Driver" />
 
+        <variable
+            name="isSelect"
+            type="Boolean" />
+
+        <import type="android.view.View"/>
+
     </data>
 
     <androidx.cardview.widget.CardView
@@ -25,10 +31,17 @@
             android:weightSum="1"
             android:gravity="center">
 
+            <RadioButton
+                android:id="@+id/rbSelect"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.2"
+                android:visibility="@{isSelect ? View.VISIBLE : View.GONE, default = visible}" />
+
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.4"
+                android:layout_weight="0.3"
                 android:ellipsize="end"
                 android:ems="20"
                 android:text="@{driver.name}"
@@ -39,7 +52,7 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.4"
+                android:layout_weight="0.3"
                 android:ellipsize="end"
                 android:ems="20"
                 android:text="@{driver.mobile}"
@@ -52,6 +65,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.2"
+                android:visibility="@{isSelect ? View.GONE : View.VISIBLE, default = visible}"
                 android:src="@drawable/ic_delete"/>
         </androidx.appcompat.widget.LinearLayoutCompat>
 

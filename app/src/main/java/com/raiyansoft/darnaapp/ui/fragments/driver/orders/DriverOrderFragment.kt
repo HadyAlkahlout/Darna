@@ -1,4 +1,4 @@
-package com.raiyansoft.darnaapp.ui.fragments.storeManger.orders
+package com.raiyansoft.darnaapp.ui.fragments.driver.orders
 
 import android.graphics.Color
 import android.os.Bundle
@@ -11,33 +11,30 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.raiyansoft.darnaapp.R
-import com.raiyansoft.darnaapp.adapters.ProductsAdapter
-import com.raiyansoft.darnaapp.databinding.FragmentMarketOrderBinding
+import com.raiyansoft.darnaapp.adapters.DriverAdapter
+import com.raiyansoft.darnaapp.databinding.FragmentDriverOrderBinding
 import com.raiyansoft.darnaapp.dialog.LoadingDialog
-import com.raiyansoft.darnaapp.model.product.Product
-import com.raiyansoft.darnaapp.ui.viewmodel.MarketOrdersViewModel
+import com.raiyansoft.darnaapp.ui.viewmodel.DriverOrdersViewModel
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody
 
-class MarketOrderFragment : Fragment(), ProductsAdapter.ProductClick  {
+class DriverOrderFragment : Fragment() {
 
-    private lateinit var binding: FragmentMarketOrderBinding
+    private lateinit var binding: FragmentDriverOrderBinding
     private var orderId: Int = 0
     private var status: Int = 0
     private val viewModel by lazy {
-        ViewModelProvider(this)[MarketOrdersViewModel::class.java]
+        ViewModelProvider(this)[DriverOrdersViewModel::class.java]
     }
     private val loading by lazy {
         LoadingDialog()
     }
-    private lateinit var products: ArrayList<Product>
-    private lateinit var adapter: ProductsAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentMarketOrderBinding.inflate(inflater, container, false)
+        binding = FragmentDriverOrderBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -48,19 +45,13 @@ class MarketOrderFragment : Fragment(), ProductsAdapter.ProductClick  {
 
     private fun doInitialization() {
         orderId = requireArguments().getInt("id")
-        status = requireArguments().getInt("status")
-        binding.isWaiting = status == 1
         loading.isCancelable = false
-        products = ArrayList()
-        adapter = ProductsAdapter(true, products, this)
-        binding.rcProducts.adapter = adapter
-        binding.rcProducts.layoutManager = LinearLayoutManager(requireContext())
         getOrderDetails(orderId)
-        binding.btnReceipt.setOnClickListener {
-            changeOrderStatus(2)
+        binding.btnReceived.setOnClickListener {
+            changeOrderStatus(4)
         }
-        binding.btnRejection.setOnClickListener {
-            changeOrderStatus(6)
+        binding.btnDelivered.setOnClickListener {
+            changeOrderStatus(5)
         }
         binding.imgBack.setOnClickListener {
             findNavController().navigateUp()
@@ -69,15 +60,12 @@ class MarketOrderFragment : Fragment(), ProductsAdapter.ProductClick  {
 
     private fun getOrderDetails(orderId: Int) {
         loading.show(requireActivity().supportFragmentManager, "loading")
-        viewModel.marketOrderDetails(orderId)
+        viewModel.orderDetails(orderId)
         viewModel.dataDetails.observe(viewLifecycleOwner,
-            {response->
-                if (response.status && response.code == 200){
-                    binding.orderNo = "${getString(R.string.order)} ${response.data.id}"
-                    binding.order = response.data
-                    adapter.data.addAll(response.data.products)
-                    adapter.notifyDataSetChanged()
-                    when(response.data.status_id){
+            { response ->
+                if (response.status && response.code == 200) {
+                    binding.orderDetails = response.data
+                    when (response.data.status_id) {
                         1 -> {
                             binding.cardStatus.setCardBackgroundColor(Color.parseColor("#AA3513"))
                         }
@@ -115,8 +103,8 @@ class MarketOrderFragment : Fragment(), ProductsAdapter.ProductClick  {
         map["status"] = toRequestBody(status.toString())
         viewModel.changeOrderStatus(map)
         viewModel.dataStatus.observe(viewLifecycleOwner,
-            {response->
-                if (response.status && response.code == 200){
+            { response ->
+                if (response.status && response.code == 200) {
                     loading.dismiss()
                     Snackbar.make(requireView(), getString(R.string.done_successfully), 3000).show()
                     requireActivity().recreate()
@@ -129,14 +117,6 @@ class MarketOrderFragment : Fragment(), ProductsAdapter.ProductClick  {
 
     private fun toRequestBody(value: String): RequestBody {
         return RequestBody.create("text/plain".toMediaTypeOrNull(), value)
-    }
-
-    override fun productClick(id: Int) {
-
-    }
-
-    override fun deleteClick(id: Int) {
-
     }
 
 }

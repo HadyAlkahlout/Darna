@@ -127,6 +127,16 @@
     <string name="empty_locations">There is no locations</string>
     <string name="empty_drivers">There is no drivers</string>
     <string name="starting_location">Starting Location</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="restaurant_location">Restaurant Location</string>
+    <string name="customer_location">Customer Location</string>
+    <string name="receive_time">Required receive time</string>
+    <string name="delivery_time">Required delivery time</string>
+    <string name="select">Selection</string>
+    <string name="driver_name">Driver Name</string>
+    <string name="finish_time">Finish Time</string>
+    <string name="place">Place</string>
+    <string name="transfer_the_order">Transfer The Order</string>
+    <string name="no_assign">Assign the order to any driver !!</string>
+    <string name="delivery_received">Delivery received</string>
+    <string name="delivered">Delivered</string>
 </resources>

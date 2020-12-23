@@ -104,8 +104,8 @@ class MarketOrdersFragment : Fragment(), OrderAdapter.OrderClick {
             })
     }
 
-    override fun orderClick(id: Int) {
-        val bundle = bundleOf("id" to id)
+    override fun orderClick(id: Int, status: Int) {
+        val bundle = bundleOf("id" to id, "status" to status)
         findNavController().navigate(
             R.id.action_marketOrdersFragment_to_marketOrderFragment,
             bundle

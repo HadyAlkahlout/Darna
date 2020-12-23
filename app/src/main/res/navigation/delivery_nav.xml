@@ -49,6 +49,13 @@
             app:popExitAnim="@anim/slide_out_right"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left" />
+        <action
+            android:id="@+id/action_deliveryHomeFragment_to_deliveryOrdersFragment"
+            app:destination="@id/deliveryOrdersFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
@@ -154,4 +161,25 @@
         android:id="@+id/mainDeliveryReportsFragment"
         android:name="com.raiyansoft.darnaapp.ui.fragments.delivery.reports.MainDeliveryReportsFragment"
         android:label="MainDeliveryReportsFragment" />
+    <fragment
+        android:id="@+id/deliveryOrdersFragment"
+        android:name="com.raiyansoft.darnaapp.ui.fragments.delivery.orders.DeliveryOrdersFragment"
+        android:label="DeliveryOrdersFragment" >
+        <action
+            android:id="@+id/action_deliveryOrdersFragment_to_deliveryOrderFragment"
+            app:destination="@id/deliveryOrderFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left" />
+    </fragment>
+    <fragment
+        android:id="@+id/deliveryOrderFragment"
+        android:name="com.raiyansoft.darnaapp.ui.fragments.delivery.orders.DeliveryOrderFragment"
+        android:label="DeliveryOrderFragment">
+        <argument android:name="id"
+            android:defaultValue="none"/>
+        <argument android:name="status"
+            android:defaultValue="none"/>
+    </fragment>
 </navigation>

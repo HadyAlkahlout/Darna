@@ -5,11 +5,18 @@
 
     <fragment
         android:id="@+id/driverHomeFragment"
-        android:name="com.raiyansoft.darnaapp.ui.fragments.driver.DriverHomeFragment"
+        android:name="com.raiyansoft.darnaapp.ui.fragments.driver.home.DriverHomeFragment"
         android:label="DriverHomeFragment" >
         <action
             android:id="@+id/action_driverHomeFragment_to_settingsFragment"
             app:destination="@id/settingsFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left" />
+        <action
+            android:id="@+id/action_driverHomeFragment_to_driverOrdersFragment"
+            app:destination="@id/driverOrdersFragment"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
             app:enterAnim="@anim/slide_in_right"
@@ -76,4 +83,23 @@
         android:id="@+id/callFragment"
         android:name="com.raiyansoft.darnaapp.ui.fragments.settings.CallFragment"
         android:label="CallFragment" />
+    <fragment
+        android:id="@+id/driverOrdersFragment"
+        android:name="com.raiyansoft.darnaapp.ui.fragments.driver.orders.DriverOrdersFragment"
+        android:label="DriverOrdersFragment" >
+        <action
+            android:id="@+id/action_driverOrdersFragment_to_driverOrderFragment"
+            app:destination="@id/driverOrderFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left" />
+    </fragment>
+    <fragment
+        android:id="@+id/driverOrderFragment"
+        android:name="com.raiyansoft.darnaapp.ui.fragments.driver.orders.DriverOrderFragment"
+        android:label="DriverOrderFragment">
+        <argument android:name="id"
+            android:defaultValue="none"/>
+    </fragment>
 </navigation>

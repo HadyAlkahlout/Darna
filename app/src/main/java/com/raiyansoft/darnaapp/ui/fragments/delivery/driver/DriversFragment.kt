@@ -28,7 +28,7 @@ class DriversFragment : Fragment(), DriverAdapter.DriverClick {
         LoadingDialog()
     }
     private val adapter by lazy {
-        DriverAdapter(this)
+        DriverAdapter(false, this)
     }
 
     override fun onCreateView(
@@ -67,6 +67,8 @@ class DriversFragment : Fragment(), DriverAdapter.DriverClick {
                             adapter.data.addAll(response.data)
                             adapter.notifyDataSetChanged()
                             binding.isFill = true
+                        }else{
+                            binding.isFill = false
                         }
                     }
                     loading.dismiss()
@@ -92,6 +94,10 @@ class DriversFragment : Fragment(), DriverAdapter.DriverClick {
                     Snackbar.make(requireView(), response.message, 3000).show()
                 }
             })
+    }
+
+    override fun assignDriver(id: Int) {
+
     }
 
     override fun onResume() {

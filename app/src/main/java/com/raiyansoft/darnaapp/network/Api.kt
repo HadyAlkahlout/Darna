@@ -364,4 +364,56 @@ interface Api {
         @Query("page") page: Int
     ) : Response<FullPagingGeneral<Order>>
 
+    @GET("orders/getDeliveryOrders")
+    suspend fun getDeliveryOrders(
+        @Header("lang") lang: String,
+        @Header("Authorization") Authorization: String,
+        @Query("page") page: Int
+    ) : Response<FullPagingGeneral<Order>>
+
+    @GET("orders/deliveryDetails/{id}")
+    suspend fun deliveryOrderDetails(
+        @Header("lang") lang: String,
+        @Header("Authorization") Authorization: String,
+        @Path("id") id: Int
+    ) : Response<FullGeneral<OrderDetails>>
+
+    @Multipart
+    @POST("orders/acceptDelivery")
+    suspend fun changeDeliveryOrderStatus(
+        @Header("lang") lang: String,
+        @Header("Authorization") Authorization: String,
+        @PartMap params: Map<String, @JvmSuppressWildcards RequestBody>
+    ) : Response<General>
+
+    @Multipart
+    @POST("orders/assignDriver")
+    suspend fun assignDriver(
+        @Header("lang") lang: String,
+        @Header("Authorization") Authorization: String,
+        @PartMap params: Map<String, @JvmSuppressWildcards RequestBody>
+    ) : Response<General>
+
+    @GET("orders/getDriverOrders")
+    suspend fun getDriverOrders(
+        @Header("lang") lang: String,
+        @Header("Authorization") Authorization: String,
+        @Query("page") page: Int
+    ) : Response<FullPagingGeneral<Order>>
+
+    @GET("orders/driverDetails/{id}")
+    suspend fun driverDetails(
+        @Header("lang") lang: String,
+        @Header("Authorization") Authorization: String,
+        @Path("id") id: Int
+    ) : Response<FullGeneral<OrderDetails>>
+
+    @Multipart
+    @POST("orders/changeStatusDriver")
+    suspend fun changeStatusDriver(
+        @Header("lang") lang: String,
+        @Header("Authorization") Authorization: String,
+        @PartMap params: Map<String, @JvmSuppressWildcards RequestBody>
+    ) : Response<General>
+
 }

@@ -8,7 +8,7 @@ import com.raiyansoft.darnaapp.R
 import com.raiyansoft.darnaapp.databinding.ItemDriverBinding
 import com.raiyansoft.darnaapp.model.driver.Driver
 
-class DriverAdapter(var listener: DriverClick) : RecyclerView.Adapter<DriverAdapter.MyViewHolder>() {
+class DriverAdapter(var isSelect: Boolean, var listener: DriverClick) : RecyclerView.Adapter<DriverAdapter.MyViewHolder>() {
 
     var data: ArrayList<Driver> = ArrayList()
     private lateinit var layoutInflater: LayoutInflater
@@ -25,6 +25,19 @@ class DriverAdapter(var listener: DriverClick) : RecyclerView.Adapter<DriverAdap
         binding.imgDelete.setOnClickListener {
             listener.deleteDriver(data[position].id)
         }
+        binding.isSelect = isSelect
+        binding.rbSelect.setOnCheckedChangeListener { _, _ ->
+            for (i in 0 until data.size) {
+                if (data[i].isSelect) {
+                    data[i].isSelect = false
+                }
+            }
+            data[position].isSelect = true
+            notifyDataSetChanged()
+            listener.assignDriver(data[position].id)
+        }
+        binding.rbSelect.isChecked = data[position].isSelect
+
     }
 
     override fun getItemCount(): Int {
@@ -40,5 +53,6 @@ class DriverAdapter(var listener: DriverClick) : RecyclerView.Adapter<DriverAdap
 
     interface DriverClick {
         fun deleteDriver(id: Int)
+        fun assignDriver(id: Int)
     }
 }

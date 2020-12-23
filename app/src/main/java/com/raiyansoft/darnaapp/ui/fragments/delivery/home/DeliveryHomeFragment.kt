@@ -68,7 +68,7 @@ class DeliveryHomeFragment : Fragment(), View.OnClickListener {
                 findNavController().navigate(R.id.action_deliveryHomeFragment_to_locationsFragment)
             }
             R.id.buttonIncomingOrders -> {
-                Snackbar.make(requireView(), getString(R.string.orders), 5000).show()
+                findNavController().navigate(R.id.action_deliveryHomeFragment_to_deliveryOrdersFragment)
             }
             R.id.buttonEditAccount -> {
                 findNavController().navigate(R.id.action_deliveryHomeFragment_to_editDeliveryProfileFragment)

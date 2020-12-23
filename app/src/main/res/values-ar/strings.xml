@@ -128,4 +128,16 @@
     <string name="empty_locations">لا يوجد محافظات</string>
     <string name="empty_drivers">لا يوجد سائقين</string>
     <string name="starting_location">لوكيشن الانطلاق</string>
+    <string name="restaurant_location">موقع المطعم</string>
+    <string name="customer_location">موقع العميل</string>
+    <string name="receive_time">وقت الاستلام المطلوب</string>
+    <string name="delivery_time">وقت التسليم المطلوب</string>
+    <string name="select">الاختيار</string>
+    <string name="driver_name">اسم السائق</string>
+    <string name="finish_time">وقت الانتهاء</string>
+    <string name="place">المكان</string>
+    <string name="transfer_the_order">تحويل الطلب</string>
+    <string name="no_assign">قم بتعيين الطلب لأي سائق !!</string>
+    <string name="delivery_received">تم استلام التوصيل</string>
+    <string name="delivered">تم التوصيل</string>
 </resources>

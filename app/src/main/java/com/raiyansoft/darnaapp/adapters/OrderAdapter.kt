@@ -47,7 +47,7 @@ class OrderAdapter(var listener: OrderClick) : RecyclerView.Adapter<OrderAdapter
             }
         }
         binding.cardOrder.setOnClickListener {
-            listener.orderClick(position)
+            listener.orderClick(data[position].id, data[position].status_id)
         }
     }
 
@@ -63,6 +63,6 @@ class OrderAdapter(var listener: OrderClick) : RecyclerView.Adapter<OrderAdapter
     }
 
     interface OrderClick {
-        fun orderClick(id: Int)
+        fun orderClick(id: Int, status: Int)
     }
 }

@@ -16,6 +16,8 @@ data class OrderDetails(
     val id: Int,
     @SerializedName("market_name")
     val market_name: String,
+    @SerializedName("market_location")
+    val market_location: String,
     @SerializedName("payment")
     val payment: String,
     @SerializedName("payment_id")
@@ -29,5 +31,13 @@ data class OrderDetails(
     @SerializedName("total")
     val total: String,
     @SerializedName("user_name")
-    val user_name: String
+    val user_name: String,
+    @SerializedName("user_location")
+    val user_location: String,
+    @SerializedName("receive_time")
+    val receive_time: String,
+    @SerializedName("delivery_time")
+    val delivery_time: String,
+    @SerializedName("time")
+    val time: Int
 )

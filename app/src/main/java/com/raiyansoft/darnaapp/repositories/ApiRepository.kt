@@ -267,7 +267,7 @@ class ApiRepository {
         to: String,
         page: Int
     ) =
-        ServiceBuilder.apis!!.completeMarketOrder(lang, Authorization, from, to, page)
+        ServiceBuilder.apis!!.completeDeliveryOrder(lang, Authorization, from, to, page)
 
     suspend fun canceledDeliveryOrder(
         lang: String,
@@ -276,7 +276,7 @@ class ApiRepository {
         to: String,
         page: Int
     ) =
-        ServiceBuilder.apis!!.canceledMarketOrder(lang, Authorization, from, to, page)
+        ServiceBuilder.apis!!.canceledDeliveryOrder(lang, Authorization, from, to, page)
 
     suspend fun refusedDeliveryOrder(
         lang: String,
@@ -285,6 +285,55 @@ class ApiRepository {
         to: String,
         page: Int
     ) =
-        ServiceBuilder.apis!!.refusedMarketOrder(lang, Authorization, from, to, page)
+        ServiceBuilder.apis!!.refusedDeliveryOrder(lang, Authorization, from, to, page)
+
+    suspend fun getDeliveryOrders(
+        lang: String,
+        Authorization: String,
+        page: Int
+    ) =
+        ServiceBuilder.apis!!.getDeliveryOrders(lang, Authorization, page)
+
+    suspend fun deliveryOrderDetails(
+        lang: String,
+        Authorization: String,
+        id: Int
+    ) =
+        ServiceBuilder.apis!!.deliveryOrderDetails(lang, Authorization, id)
+
+    suspend fun changeDeliveryOrderStatus(
+        lang: String,
+        Authorization: String,
+        params: Map<String, RequestBody>
+    ) =
+        ServiceBuilder.apis!!.changeDeliveryOrderStatus(lang, Authorization, params)
+
+    suspend fun assignDriver(
+        lang: String,
+        Authorization: String,
+        params: Map<String, RequestBody>
+    ) =
+        ServiceBuilder.apis!!.assignDriver(lang, Authorization, params)
+
+    suspend fun getDriverOrders(
+        lang: String,
+        Authorization: String,
+        page: Int
+    ) =
+        ServiceBuilder.apis!!.getDriverOrders(lang, Authorization, page)
+
+    suspend fun driverDetails(
+        lang: String,
+        Authorization: String,
+        id: Int
+    ) =
+        ServiceBuilder.apis!!.driverDetails(lang, Authorization, id)
+
+    suspend fun changeStatusDriver(
+        lang: String,
+        Authorization: String,
+        params: Map<String, RequestBody>
+    ) =
+        ServiceBuilder.apis!!.changeStatusDriver(lang, Authorization, params)
 
 }

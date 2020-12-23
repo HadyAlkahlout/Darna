@@ -207,6 +207,8 @@
         android:label="MarketOrderFragment">
         <argument android:name="id"
             android:defaultValue="none"/>
+        <argument android:name="status"
+            android:defaultValue="none"/>
     </fragment>
     <fragment
         android:id="@+id/mainReportsFragment"
